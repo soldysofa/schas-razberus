@@ -1,0 +1,679 @@
+<meta charset="utf-8">
+<title>Щас разберусь</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;600;800;900&family=Caveat:wght@700&family=PT+Mono&display=swap">
+<style>
+/* Лендинг интенсива «Щас разберусь» в системе обложек канала: бумага, чёрный капс + розовые скобки,
+   окна старого компа, ретро-фото 80-х. Один светлый «бумажный» мир, тёмной темы нет намеренно. */
+:root{
+  --paper:#F2ECDF; --paper-2:#E9E1D0; --win:#FBF7EE; --ink:#1B1714; --muted:#5f554b;
+  --pink:#FF1F8E; --yellow:#FFE229;
+  --display:"Onest","Helvetica Neue",Arial,sans-serif;
+  --body:"Onest","Helvetica Neue",Arial,sans-serif;
+  --mono:"PT Mono","Courier New",Courier,monospace;
+  --hand:"Caveat","Segoe Print","Comic Sans MS",cursive;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:17px/1.55 var(--body);margin:0;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.35;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+section{padding-block:56px}
+p{margin:0}
+a{color:inherit}
+
+/* типографика обложек */
+.st{font-family:var(--display);font-weight:900;text-transform:uppercase;letter-spacing:-.045em;line-height:.88;margin:0;text-wrap:balance}
+.st.big{font-size:clamp(40px,7.4vw,92px)}
+.st.mid{font-size:clamp(34px,6.4vw,76px)}
+.st .p{color:var(--pink);display:block}
+.hand{font-family:var(--hand);font-weight:700;color:var(--pink);font-size:clamp(26px,3.4vw,36px);line-height:1.1;display:inline-block;transform:rotate(-4deg)}
+.num{font-family:var(--mono);font-style:italic;font-size:15px;color:var(--muted)}
+.lead{font-size:clamp(18px,2vw,21px);max-width:62ch}
+.mark{background:var(--yellow);padding:0 .18em}
+
+/* окно старого компа */
+.win{background:var(--win);border:3px solid var(--ink);box-shadow:8px 8px 0 var(--ink);min-width:0}
+.win .bar{height:34px;border-bottom:3px solid var(--ink);display:flex;align-items:center;padding:0 10px;
+  background:repeating-linear-gradient(0deg,var(--ink) 0 2px,transparent 2px 6px)}
+.win .bar i{width:16px;height:16px;border:3px solid var(--ink);background:var(--win);flex:none}
+.win .bar b{background:var(--win);padding:0 10px;font:700 15px var(--mono);margin:0 auto;text-transform:lowercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:80%}
+.win .in{padding:16px 18px;font-family:var(--mono);font-size:15px;line-height:1.5}
+.win ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.win li{display:grid;grid-template-columns:18px 1fr;gap:6px}
+.win li::before{content:"›";font-weight:700}
+.win li.ok::before{content:"✓";color:var(--pink)}
+.win .txt{font-family:var(--body);font-size:16px;line-height:1.5}
+.win h3{font:900 20px/1.05 var(--display);text-transform:uppercase;letter-spacing:-.03em;margin:0 0 8px}
+
+.ph{display:block;width:100%;height:100%;object-fit:cover;filter:sepia(.15) contrast(1.05) saturate(.9);border:3px solid var(--ink);max-width:100%}
+
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--pink);color:#fff;text-decoration:none;font:800 18px var(--display);
+  text-transform:uppercase;letter-spacing:-.01em;padding:16px 26px;border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);transition:transform .12s,box-shadow .12s}
+.btn:hover{transform:translate(2px,2px);box-shadow:4px 4px 0 var(--ink)}
+.btn:focus-visible{outline:3px solid var(--yellow);outline-offset:4px}
+.btn.alt{background:var(--yellow);color:var(--ink)}
+
+/* шапка */
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:18px;font-family:var(--mono);font-size:14px;flex-wrap:wrap}
+.logo{font:900 16px var(--display);text-transform:uppercase;letter-spacing:-.02em;white-space:nowrap}
+.logo span{font-family:var(--hand);font-weight:700;font-size:20px;text-transform:none;background:var(--pink);color:#fff;border-radius:30px;padding:0 12px 2px;margin-left:6px;display:inline-block;transform:rotate(-4deg)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:36px;align-items:center;padding-block:28px 56px}
+.hero .txt{display:grid;gap:22px;min-width:0}
+.hero .photo{position:relative;aspect-ratio:4/5;max-width:100%}
+.hero .photo img{object-position:52% 40%}
+.pill{position:absolute;z-index:2;display:flex;align-items:center;gap:10px;background:var(--win);color:var(--ink);border-radius:40px;
+  padding:9px 18px 10px;font:600 15px var(--body);box-shadow:0 6px 18px rgba(0,0,0,.2);max-width:calc(100% - 16px)}
+.pill::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--dot,var(--pink))}
+.pill.dk{background:var(--ink);color:#fff}
+.facts{display:flex;flex-wrap:wrap;gap:10px}
+.facts span{border:2px solid var(--ink);background:var(--win);padding:6px 14px;font:700 14px var(--mono)}
+.cta-row{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+@media (max-width:820px){.hero{grid-template-columns:1fr}.hero .photo{max-width:440px;width:100%;justify-self:center}}
+
+/* общие сетки */
+.head{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:end;margin-bottom:34px}
+.head>*,.final>*,.faq .grid>*,.two>*,.three>*{min-width:0}
+.head .ph{aspect-ratio:4/5;height:auto}
+@media (max-width:820px){.head{grid-template-columns:1fr}.head .ph{max-width:260px}}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media (max-width:820px){.three,.two{grid-template-columns:1fr}}
+
+.say{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:end;margin-top:30px}
+@media (max-width:820px){.say{grid-template-columns:1fr}}
+
+/* мой день */
+.day{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media (max-width:900px){.day{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.day{grid-template-columns:1fr}}
+.day .t{font:900 34px var(--display);letter-spacing:-.04em;color:var(--pink);line-height:1}
+
+/* программа */
+.weeks{display:grid;gap:30px}
+.wk{display:grid;grid-template-columns:220px 1fr;gap:26px;align-items:start}
+.wk .side{display:grid;gap:12px;min-width:0}
+.wk .side .ph{aspect-ratio:1/1;height:auto}
+.wk .n{font:700 14px var(--mono);text-transform:uppercase}
+.wk .wt{overflow-wrap:break-word;font:900 26px/1 var(--display);text-transform:uppercase;letter-spacing:-.04em}
+.wk .open{font-family:var(--hand);color:var(--pink);font-size:26px;line-height:1;transform:rotate(-3deg);display:inline-block}
+.les{display:grid;gap:14px}
+.les .l{display:grid;grid-template-columns:52px 1fr;gap:12px}
+.les .d{font:700 15px var(--mono);padding-top:2px}
+.les b{font-weight:800}
+.out{margin-top:16px;border-top:2px dashed var(--ink);padding-top:12px;font:700 14px var(--mono)}
+.out::before{content:"✓ останется: ";color:var(--pink)}
+.wk.bonus .win{box-shadow:8px 8px 0 var(--pink)}
+.new{font:700 11px var(--mono);text-transform:uppercase;background:var(--yellow);border:2px solid var(--ink);padding:0 6px;margin-left:6px;vertical-align:2px}
+@media (max-width:820px){.wk{grid-template-columns:1fr}.wk .side{grid-template-columns:110px 1fr;align-items:center}}
+
+/* урок */
+.lesson{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media (max-width:820px){.lesson{grid-template-columns:1fr 1fr}}
+@media (max-width:460px){.lesson{grid-template-columns:1fr}}
+
+/* таблица */
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:440px;font-family:var(--mono);font-size:15px}
+td,th{text-align:left;padding:10px 12px;border-bottom:2px dashed var(--ink);vertical-align:top}
+th{font-size:13px;text-transform:uppercase}
+tr:last-child td{border-bottom:0}
+td:last-child,th:last-child{text-align:right;font-variant-numeric:tabular-nums}
+
+/* справлюсь */
+.faq{background:var(--ink);color:var(--paper)}
+.faq .grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:36px;align-items:start}
+.faq .photo{position:relative}
+.faq .photo .ph{aspect-ratio:3/4;height:auto;border-color:var(--paper)}
+.faq .q{display:grid;gap:22px}
+.faq .win{color:var(--ink);box-shadow:8px 8px 0 var(--pink)}
+.faq .st .w{color:#fff;text-decoration:underline;text-decoration-thickness:6px;text-underline-offset:8px}
+.faq .st .y{background:var(--yellow);color:var(--ink);padding:0 .12em}
+@media (max-width:820px){.faq .grid{grid-template-columns:1fr}.faq .photo{max-width:340px}}
+
+/* финал */
+.final{display:grid;grid-template-columns:1fr 280px;gap:36px;align-items:center}
+.final .ph{aspect-ratio:4/5;height:auto}
+.price{font:900 clamp(56px,10vw,120px)/.9 var(--display);letter-spacing:-.05em}
+@media (max-width:820px){.final{grid-template-columns:1fr}.final .ph{max-width:240px}}
+footer{padding-block:30px 46px;text-align:center}
+.ig{color:inherit;text-decoration:none;font-weight:800;border-bottom:2px solid var(--pink)}
+.ig:hover{background:var(--pink);color:#fff}
+a.pill{text-decoration:none}
+.contacts{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 28px;margin-top:22px}
+.contacts a{font:900 clamp(22px,5vw,34px) var(--display);text-transform:lowercase;color:var(--ink);text-decoration:none;display:flex;flex-direction:column;align-items:center;line-height:1.05}
+.contacts a:hover{color:var(--pink)}
+.contacts small{font:700 18px var(--hand);color:var(--pink);text-transform:none}
+.tariffs{margin-top:64px;display:grid;gap:22px}
+.tariffs .txt{font-size:15px}
+.tariffs .txt p+p{margin-top:10px}
+.tariffs h3{font-size:18px}
+.tp{font:900 34px/1 var(--display);letter-spacing:-.04em;margin:4px 0 6px}
+.tp s{font-size:18px;color:var(--muted);font-weight:700;margin-left:6px}
+.tn{font-family:var(--mono);font-size:14px;color:var(--muted)}
+
+
+/* компактнее окна и больше воздуха (26.11) */
+section{padding-block:84px}
+.win{box-shadow:6px 6px 0 var(--ink)}
+.win .bar{height:28px}
+.win .bar b{font-size:13px}
+.win .bar i{width:13px;height:13px}
+.win .in{padding:13px 15px;font-size:14px}
+.win .txt{font-size:14.5px;line-height:1.5}
+.win h3{font-size:17px;margin-bottom:6px}
+.three,.two{gap:34px}
+.day{gap:28px}
+.lesson{gap:28px}
+.head{margin-bottom:46px}
+.tariffs .hand,.say>.hand{margin-bottom:22px!important;justify-self:start}
+.tariffs .txt{font-size:13.5px}
+.tariffs h3{font-size:15px}
+.tp{font-size:28px}
+.day .t{font-size:28px}
+/* наведение на все окна: приподнимается, фон нежно-розовый, тень розовая */
+:root{--blush:#FFE4EF}
+.win{--wbg:var(--win);background:var(--wbg);transition:transform .25s cubic-bezier(.3,1.6,.5,1),box-shadow .25s ease,background-color .25s ease}
+.win .bar b,.win .bar i{background:var(--wbg);transition:background-color .25s ease}
+.win h3{background:linear-gradient(var(--yellow),var(--yellow)) no-repeat 0 85%/0 .45em;transition:background-size .35s ease;width:fit-content;padding:0 .1em;margin-left:-.1em}
+.win .in.txt:not(:has(.les))::after{content:"";display:inline-block;width:.55em;height:1.05em;background:var(--pink);vertical-align:-.15em;margin-left:4px;opacity:0}
+@media (hover:hover){
+  .win:hover{--wbg:var(--blush);transform:translate(-4px,-6px) rotate(-.6deg);box-shadow:13px 14px 0 var(--pink)}
+  .win:nth-child(even):hover{transform:translate(-4px,-6px) rotate(.6deg)}
+  .weeks .win:hover,.day~.win:hover,.win:has(.tbl):hover{transform:translate(-4px,-5px)}
+  .win:hover .bar i{background:var(--pink)}
+  .win:hover h3{background-size:100% .45em}
+  .win:hover .in.txt::after{animation:caret 1s steps(1) infinite}
+}
+@keyframes caret{0%,100%{opacity:1}50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.btn{transition:none}.win{transition:none}.win:hover{transform:none!important}.win:hover .in.txt::after{animation:none;opacity:1}}
+/* телефон (26.11): нет наведения — окно оживает в середине экрана, окна и фото выезжают снизу */
+@media (hover:none){
+  .win.live{--wbg:var(--blush);transform:translate(-3px,-5px) rotate(-.6deg);box-shadow:11px 12px 0 var(--pink)}
+  .win.live:nth-child(even){transform:translate(-3px,-5px) rotate(.6deg)}
+  .weeks .win.live,.day~.win.live,.win.live:has(.tbl){transform:translate(-3px,-4px)}
+  .win.live .bar i{background:var(--pink)}
+  .win.live h3{background-size:100% .45em}
+  .win.live .in.txt::after{animation:caret 1s steps(1) infinite}
+  .btn:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
+  html.mob .rv{opacity:0;translate:0 34px;transition:opacity .6s ease,translate .6s cubic-bezier(.2,.9,.3,1.15),transform .25s cubic-bezier(.3,1.6,.5,1),box-shadow .25s ease,background-color .25s ease}
+  html.mob .rv.ph{translate:0 34px;rotate:-2deg;transition:opacity .7s ease,translate .7s cubic-bezier(.2,.9,.3,1.15),rotate .7s ease}
+  html.mob .rv.on{opacity:1;translate:0 0;rotate:0deg}
+}
+@media (prefers-reduced-motion:reduce){html.mob .rv{opacity:1!important;translate:none!important;rotate:none!important;transition:none!important}.win.live{transform:none!important}}
+/* крупнее (26.11): гигантская шапка, цифры, бегущая строка */
+.mega{margin:10px 0 18px;font-family:var(--display);font-weight:900;text-transform:uppercase;letter-spacing:-.06em;line-height:.8}
+.mega .m1{display:flex;align-items:flex-start;gap:.18em;font-size:clamp(96px,27vw,300px)}
+.mega .was{font:700 clamp(30px,6vw,72px)/1 var(--hand);text-transform:none;letter-spacing:0;color:var(--pink);
+  transform:rotate(-8deg);margin-top:.35em;text-decoration:line-through;text-decoration-thickness:.09em;text-decoration-color:var(--ink)}
+.mega .m2{display:block;color:var(--pink);font-size:clamp(48px,13.6vw,152px);margin-top:.06em}
+.hero{padding-top:8px}
+.nums{background:var(--ink);color:var(--paper);padding-block:46px;border-block:3px solid var(--ink)}
+.nums .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.nums div{display:grid;gap:8px;align-content:start;min-width:0}
+.nums b{font:900 clamp(60px,8.6vw,104px)/.85 var(--display);letter-spacing:-.06em;white-space:nowrap}
+.nums b small{font-size:.45em;margin-left:.08em;color:var(--yellow)}
+.nums b.pk{color:var(--pink)}
+.nums span{font:700 14px var(--mono);text-transform:lowercase;max-width:20ch}
+@media (max-width:820px){.nums .wrap{grid-template-columns:1fr 1fr;gap:34px 18px}}
+.ticker{background:var(--yellow);border-bottom:3px solid var(--ink);overflow:hidden;padding-block:14px;white-space:nowrap}
+.ticker .track{display:inline-flex;animation:tick 48s linear infinite}
+.ticker span{font:900 clamp(20px,2.6vw,30px) var(--display);text-transform:uppercase;letter-spacing:-.03em;padding-right:.3em}
+@keyframes tick{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.ticker .track{animation:none}}
+/* чат → агент при прокрутке */
+.ca{height:210vh;margin:10px 0 56px;position:relative}
+.ca-stick{position:sticky;top:max(16px,8vh);display:grid;gap:18px;max-width:640px;margin:0 auto}
+.ca-tabs{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px}
+.ca-tabs{position:relative;margin-top:44px}
+.ca-poke{position:absolute;bottom:100%;margin-bottom:2px;font-family:var(--hand);font-weight:700;color:var(--pink);font-size:clamp(24px,3vw,30px);line-height:1;display:flex;align-items:flex-end;gap:2px;pointer-events:none;transition:opacity .3s;white-space:nowrap}
+.ca-poke svg{width:46px;height:34px;flex:none}
+.ca-poke.to-agent{right:clamp(70px,14vw,150px)}
+.ca-poke.to-chat{left:clamp(70px,14vw,140px);opacity:0}
+.ca-poke.to-chat svg{transform:scaleX(-1)}
+.ca-poke span{transform:rotate(-6deg);display:inline-block;animation:poke 1.6s ease-in-out infinite}
+@keyframes poke{50%{transform:rotate(-6deg) translateY(-4px)}}
+.ca.agent .ca-poke.to-agent{opacity:0}
+.ca.agent .ca-poke.to-chat{opacity:1}
+@media (prefers-reduced-motion:reduce){.ca-poke span{animation:none}}
+.ca-tabs button{font:900 clamp(26px,4.4vw,44px)/1 var(--display);text-transform:uppercase;letter-spacing:-.05em;background:none;border:0;padding:0;color:var(--muted);opacity:.45;cursor:pointer;transition:opacity .3s,color .3s}
+.ca-tabs button[aria-selected=true]{opacity:1;color:var(--ink)}
+.ca.agent .ca-tabs button[data-m=agent]{color:var(--pink)}
+.ca-tabs button:focus-visible{outline:3px solid var(--pink);outline-offset:4px}
+.ca-line{height:6px;border:2px solid var(--ink);background:var(--win);position:relative}
+.ca-line i{position:absolute;inset:0 auto 0 0;width:var(--p,0%);background:var(--pink)}
+.ca-ask{justify-self:end;margin-left:auto;width:fit-content;max-width:85%;background:var(--ink);color:var(--paper);border-radius:18px 18px 4px 18px;padding:9px 15px;font:600 15px var(--body);margin-bottom:14px}
+.ca-win .in{display:grid}
+.ca-body{grid-area:2/1;transition:opacity .45s ease,transform .45s ease}
+.ca-ask{grid-area:1/1}
+.ca-agent{opacity:0;transform:translateY(14px);pointer-events:none}
+.ca.agent .ca-chat{opacity:0;transform:translateY(-14px);pointer-events:none}
+.ca.agent .ca-agent{opacity:1;transform:none;pointer-events:auto}
+.ca-chat table{min-width:0;font-size:14px;margin:8px 0 10px}
+.ca-chat td,.ca-chat th{padding:6px 8px;text-align:left}
+.ca-chat p{color:var(--muted)}
+.ca-note{margin-top:12px!important;font:700 14px var(--mono)}
+.ca-agent li{opacity:0;transform:translateX(-8px);transition:opacity .3s,transform .3s}
+.ca.agent .ca-agent li{opacity:1;transform:none}
+.ca.agent .ca-agent li:nth-child(2){transition-delay:.12s}.ca.agent .ca-agent li:nth-child(3){transition-delay:.24s}
+.ca.agent .ca-agent li:nth-child(4){transition-delay:.36s}.ca.agent .ca-agent li:nth-child(5){transition-delay:.48s}
+.ca.agent .ca-agent li:nth-child(6){transition-delay:.6s}
+.ca-agent code{font:inherit;background:var(--yellow);padding:0 .2em}
+.ca.agent .ca-win{box-shadow:6px 6px 0 var(--pink)}
+.ca-hint{text-align:center;font:700 13px var(--mono);color:var(--muted);transition:opacity .3s}
+.ca.agent .ca-hint{opacity:0}
+.ca .ca-win:hover{transform:none!important}
+@media (prefers-reduced-motion:reduce){.ca-body,.ca-agent li{transition:none!important}}
+/* мне пишут */
+.dm{background:var(--paper-2)}
+.bubbles{display:grid;gap:14px;max-width:720px}
+.bb{width:fit-content;max-width:min(86%,520px);background:var(--win);border:3px solid var(--ink);border-radius:22px 22px 22px 6px;padding:12px 20px;
+  font:800 clamp(19px,2.6vw,28px)/1.2 var(--display);letter-spacing:-.02em;box-shadow:5px 5px 0 var(--ink)}
+.bb.r{justify-self:end;background:var(--pink);color:#fff;border-radius:22px 22px 6px 22px}
+.bb:not(.r):nth-child(3n){background:var(--yellow)}
+.day>*,.lesson>*,.wk>*,.les .l>*,.wrap>*,.say>*,.three>*{min-width:0}
+@media (max-width:520px){.st.mid{font-size:30px}.st.big{font-size:36px}.st{overflow-wrap:break-word;hyphens:auto}.wk .wt{font-size:21px;overflow-wrap:break-word;hyphens:auto}.win .in{padding:14px}.win{box-shadow:5px 5px 0 var(--ink)}}
+</style>
+
+<div class="wrap">
+  <div class="top">
+    <div class="logo">щас&nbsp;разберусь<span>by&nbsp;Софья</span></div>
+    <span>мини-интенсив по&nbsp;клоду и&nbsp;клод коду</span>
+  </div>
+
+  <!-- HERO -->
+  <h1 class="mega"><span class="m1">Щас<s class="was">потом</s></span><span class="m2">(разберусь)</span></h1>
+  <header class="hero">
+    <div class="txt">
+      <p class="lead">Я&nbsp;маркетолог и&nbsp;код&nbsp;не&nbsp;пишу <b>ВООБЩЕ</b>, а&nbsp;за&nbsp;меня щас&nbsp;работает отдел из&nbsp;<b>18&nbsp;агентов</b> (звучит пафосно, но&nbsp;по&nbsp;факту это&nbsp;папка на&nbsp;компе и&nbsp;куча файлов с&nbsp;правилами))</p>
+      <p class="lead">В&nbsp;интенсиве я&nbsp;на&nbsp;своих реальных задачах показываю, как&nbsp;собрать такого помощника себе, чтобы тексты, планы, таблицы, карусели и&nbsp;поиск клиентов делал он, а&nbsp;ты&nbsp;только проверял и&nbsp;жал&nbsp;«отправить».</p>
+      <div class="facts"><span>старт пн&nbsp;7.12</span><span>5 недель + бонусная</span><span>21 урок + 5 бонусных</span><span>онлайн</span></div>
+      <div class="cta-row">
+        <a class="btn" href="https://t.me/schas_razberus" target="_blank" rel="noopener">Хочу на&nbsp;интенсив →</a>
+        <span class="hand">3 990 ₽ один раз</span>
+      </div>
+    </div>
+    <div class="photo">
+      <img class="ph" src="img/sonya-shlem.jpg" alt="Софья в шлеме и белых очках на байке, Пхукет">
+      <span class="pill" style="left:8px;top:6%">старт 7.12</span>
+      <span class="pill dk" style="right:8px;top:46%;--dot:var(--yellow)">клод для&nbsp;тех, кто&nbsp;не&nbsp;пишет код</span>
+      <span class="pill" style="left:8%;bottom:7%;--dot:var(--yellow)">5 недель + бонус</span>
+      <a class="pill ig-pill" href="https://instagram.com/soldysofa" target="_blank" rel="noopener" style="right:8px;top:6%">@soldysofa</a>
+    </div>
+  </header>
+</div>
+
+<!-- КРУПНЫЕ ЦИФРЫ -->
+<div class="nums">
+  <div class="wrap">
+    <div><b>18</b><span>агентов работают на&nbsp;меня</span></div>
+    <div><b>26</b><span>уроков на&nbsp;твоих задачах</span></div>
+    <div><b class="pk">7.12</b><span>старт, пн</span></div>
+    <div><b>3&nbsp;990<small>₽</small></b><span>один раз, без&nbsp;подписки</span></div>
+  </div>
+</div>
+
+<!-- БЕГУЩАЯ СТРОКА -->
+<div class="ticker" aria-label="Что мы делаем с агентом днём">
+  <div class="track">
+    <span>карусели клиентам ✱ монтаж рилсов ✱ упаковка профиля ✱ треды каждый день ✱ ТЗ дизайнеру ✱ тестовые работодателям ✱ договоры и&nbsp;счета ✱ деньги до&nbsp;конца года ✱ афиша для&nbsp;клиента ✱ сторис и&nbsp;посты ✱ новые клиенты ✱ план на&nbsp;завтра ✱ </span><span aria-hidden="true">карусели клиентам ✱ монтаж рилсов ✱ упаковка профиля ✱ треды каждый день ✱ ТЗ дизайнеру ✱ тестовые работодателям ✱ договоры и&nbsp;счета ✱ деньги до&nbsp;конца года ✱ афиша для&nbsp;клиента ✱ сторис и&nbsp;посты ✱ новые клиенты ✱ план на&nbsp;завтра ✱ </span>
+  </div>
+</div>
+
+<!-- ЧАТ ИЛИ АГЕНТ -->
+<section style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="head">
+      <div style="display:grid;gap:20px">
+        <h2 class="st mid">Чат<span class="p">(или&nbsp;агент)</span></h2>
+        <p class="lead">Ситуэйшен: просишь гпт&nbsp;сделать контент-план, он&nbsp;выдаёт красивую табличку, ты&nbsp;её&nbsp;закрываешь и&nbsp;ничего не&nbsp;меняется&nbsp;🤡 Чат&nbsp;советует, а&nbsp;дальше всё&nbsp;руками, а&nbsp;агент сам&nbsp;берёт и&nbsp;делает.</p>
+      </div>
+      <div><span class="num">(1)</span><img class="ph" src="img/r11.jpg" alt="Ретро-фото: женщина за старым компьютером"></div>
+    </div>
+    <div class="ca" id="ca">
+      <div class="ca-stick">
+        <div class="ca-tabs" role="tablist">
+          <p class="ca-poke to-agent" aria-hidden="true"><span>тыкай</span><svg viewBox="0 0 46 34" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6 C 20 2, 36 8, 40 28"/><path d="M33 22 L40 29 L44 20"/></svg></p>
+          <p class="ca-poke to-chat" aria-hidden="true"><svg viewBox="0 0 46 34" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6 C 20 2, 36 8, 40 28"/><path d="M33 22 L40 29 L44 20"/></svg><span>а&nbsp;теперь сюда</span></p>
+          <button type="button" role="tab" data-m="chat" aria-selected="true">чат</button>
+          <span class="ca-line"><i></i></span>
+          <button type="button" role="tab" data-m="agent" aria-selected="false">агент</button>
+        </div>
+        <div class="win ca-win"><div class="bar"><i></i><b class="ca-title">чат · просто отвечает</b></div><div class="in">
+          <div class="ca-ask">сделай контент-план на&nbsp;декабрь</div>
+          <div class="ca-body ca-chat">
+            <p>Конечно! Вот&nbsp;план на&nbsp;месяц:</p>
+            <table><tr><th>Неделя</th><th>Тема</th></tr>
+              <tr><td>1</td><td>Познакомьтесь с&nbsp;аудиторией</td></tr>
+              <tr><td>2</td><td>Полезный контент</td></tr>
+              <tr><td>3</td><td>Вовлекающий контент</td></tr>
+              <tr><td>4</td><td>Продающий контент</td></tr></table>
+            <p class="ca-note">…и&nbsp;дальше всё&nbsp;руками. Закрываешь вкладку, ничего не&nbsp;меняется&nbsp;🤡</p>
+          </div>
+          <div class="ca-body ca-agent">
+            <ul>
+              <li class="ok">прочитал твои посты за&nbsp;3 месяца и&nbsp;файл голоса</li>
+              <li class="ok">нашёл 9 поводов декабря под&nbsp;твою нишу</li>
+              <li class="ok"><span>сложил план в&nbsp;файл <code>контент-план-декабрь.md</code></span></li>
+              <li class="ok">поставил 12 задач на&nbsp;доску с&nbsp;датами</li>
+              <li class="ok">собрал первые 3 карусели в&nbsp;твоих цветах</li>
+              <li>прислал всё&nbsp;в&nbsp;телегу, ждёт твоё «ок»</li>
+            </ul>
+            <p class="ca-note">Ты&nbsp;только проверяешь и&nbsp;жмёшь «отправить»&nbsp;✨</p>
+          </div>
+        </div></div>
+        <p class="ca-hint">листай дальше&nbsp;↓</p>
+      </div>
+    </div>
+    <div class="three">
+      <div class="win"><div class="bar"><i></i><b>помнит</b></div><div class="in txt"><h3>Помнит тебя</h3>Знает, чем&nbsp;ты&nbsp;занимаешься, как&nbsp;ты&nbsp;пишешь и&nbsp;что&nbsp;ты&nbsp;ему&nbsp;уже&nbsp;запретил, так&nbsp;что&nbsp;объяснять всё&nbsp;заново в&nbsp;каждом новом чате больше не&nbsp;придётся.</div></div>
+      <div class="win"><div class="bar"><i></i><b>делает</b></div><div class="in txt"><h3>Делает сам</h3>Сам&nbsp;создаёт файлы, раскладывает папки, собирает таблицы и&nbsp;картинки, а&nbsp;дело, которое ты&nbsp;делаешь каждую неделю, запускается одной командой.</div></div>
+      <div class="win"><div class="bar"><i></i><b>читает</b></div><div class="in txt"><h3>Читает документы</h3>Договор, PDF, скрины переводов, выгрузки из&nbsp;соцсетей: объяснит простыми словами и&nbsp;сведёт всё&nbsp;в&nbsp;одну табличку. Я&nbsp;перед поездкой в&nbsp;Россию попросила его&nbsp;проверить мои&nbsp;переписки за&nbsp;несколько лет, и&nbsp;он&nbsp;всё&nbsp;нашёл)))0</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- МОЙ ДЕНЬ -->
+<section>
+  <div class="wrap">
+    <div class="head">
+      <div style="display:grid;gap:20px">
+        <h2 class="st mid">Мой<span class="p">(день)</span></h2>
+        <p class="lead">Вот&nbsp;как&nbsp;это&nbsp;выглядит у&nbsp;меня в&nbsp;обычный день. Но&nbsp;естественно, я&nbsp;его&nbsp;сначала обучила и&nbsp;настроила, и&nbsp;<span class="mark">докручиваю каждый день, когда он&nbsp;косячит</span>, вот&nbsp;этому и&nbsp;буду учить.</p>
+      </div>
+      <div><span class="num">(2)</span><img class="ph" src="img/r51.jpg" alt="Ретро-фото: женщина печатает за компьютером в офисе"></div>
+    </div>
+    <div class="day">
+      <div class="win"><div class="bar"><i></i><b>утро</b></div><div class="in txt"><div class="t">9:35</div><p style="margin-top:8px">Агент сам&nbsp;просыпается и&nbsp;собирает пост для&nbsp;финтех-клиента: курс валют, гороскоп, картинка. Присылает мне&nbsp;в&nbsp;телегу, я&nbsp;проверяю и&nbsp;выкладываю.</p></div></div>
+      <div class="win"><div class="bar"><i></i><b>день</b></div><div class="in txt"><div class="t">днём</div><p style="margin-top:8px">Накидываю ему&nbsp;голосовые: «надо ТЗшку дизайнеру, ответить клиенту, посчитать, сколько я&nbsp;потратила». Он&nbsp;раскладывает по&nbsp;доске задач и&nbsp;делает то, что&nbsp;может сам.</p></div></div>
+      <div class="win"><div class="bar"><i></i><b>вечер</b></div><div class="in txt"><div class="t">вечер</div><p style="margin-top:8px">Собирает карусели для&nbsp;моего медиа, по&nbsp;3 в&nbsp;день, и&nbsp;рилсы из&nbsp;них.</p></div></div>
+      <div class="win"><div class="bar"><i></i><b>ночь</b></div><div class="in txt"><div class="t">перед сном</div><p style="margin-top:8px">Вываливаю ему&nbsp;всё, что&nbsp;в&nbsp;голове на&nbsp;завтра, и&nbsp;утром у&nbsp;меня три&nbsp;дела, с&nbsp;которых начать.</p></div></div>
+    </div>
+    <div class="win" style="margin-top:26px"><div class="bar"><i></i><b>а&nbsp;ещё&nbsp;днём мы&nbsp;с&nbsp;ним</b></div><div class="in"><ul>
+      <li>делаем карусели клиентам в&nbsp;их&nbsp;стиле и&nbsp;по&nbsp;нужным смыслам</li>
+      <li>монтируем рилсы по&nbsp;моим рефам и&nbsp;под&nbsp;музыку</li>
+      <li>собираем мою упаковку: описания, обложки, ленту</li>
+      <li>докручиваем мой личный бренд: сценарии, сторис, посты в&nbsp;канал</li>
+      <li>пишем 3–5 тредов в&nbsp;день и&nbsp;откликаемся на&nbsp;«ищу смм»</li>
+      <li>каждый понедельник собираем афишу острова для&nbsp;финтех-клиента</li>
+      <li>пишем ТЗ дизайнеру по&nbsp;скринам и&nbsp;рефам</li>
+      <li>готовим тестовые работодателям</li>
+      <li>разбираем договоры и&nbsp;счета, где&nbsp;подвох</li>
+      <li>считаем, что&nbsp;и&nbsp;когда платить до&nbsp;конца года</li>
+      <li>разбираемся в&nbsp;том, чего я&nbsp;не&nbsp;понимаю</li>
+      <li class="ok">ищем, кому написать, и&nbsp;пишем новым клиентам</li>
+    </ul></div></div>
+  </div>
+</section>
+
+<!-- ДЛЯ КОГО -->
+<section style="background:var(--paper-2)">
+  <div class="wrap">
+    <h2 class="st mid" style="margin-bottom:34px">Это<span class="p">(для&nbsp;тебя)</span></h2>
+    <div class="two">
+      <div class="win"><div class="bar"><i></i><b>для&nbsp;кого</b></div><div class="in"><ul>
+        <li>с&nbsp;нуля, программировать не&nbsp;нужно ВООБЩЕ, всё&nbsp;ставим вместе, на&nbsp;видео показываю каждый клик</li>
+        <li>маркетологи, смм-щики, блогеры, фрилансеры и&nbsp;все, у&nbsp;кого рутины на&nbsp;48593 часа в&nbsp;неделю</li>
+        <li class="ok">уже&nbsp;пробовал гпт&nbsp;или&nbsp;Клода, а&nbsp;дальше всё&nbsp;равно делал всё&nbsp;руками (узнал себя? я&nbsp;тоже так&nbsp;жила)</li>
+      </ul></div></div>
+      <div class="win"><div class="bar"><i></i><b>как&nbsp;проходит</b></div><div class="in"><ul>
+        <li>практика на&nbsp;твоих задачах, никаких учебных «представим, что&nbsp;у&nbsp;вас&nbsp;кофейня»</li>
+        <li>после каждого урока у&nbsp;тебя готовая штука: табличка расходов, шаблон каруселей, бот, и&nbsp;она работает дальше уже без&nbsp;меня</li>
+        <li class="ok">учимся нормально просить: план → шаг&nbsp;→ проверка, и&nbsp;агент перестаёт тупить</li>
+      </ul></div></div>
+    </div>
+    <div class="say" style="grid-template-columns:1fr">
+      <span class="hand" style="margin-bottom:10px">что&nbsp;останется у&nbsp;тебя</span>
+      <div>
+      <div class="two">
+        <div class="win"><div class="bar"><i></i><b>вещь 1 · недели 1–2</b></div><div class="in txt"><h3>Личный ассистент</h3>Агент на&nbsp;твоём компе, который знает тебя, держит порядок в&nbsp;папках, ведёт таблицу денег (да, теперь будет видно, куда они&nbsp;утекают) и&nbsp;запускает твои дела одной командой.</div></div>
+        <div class="win"><div class="bar"><i></i><b>вещь 2 · бонусная неделя</b></div><div class="in txt"><h3>Свой бот&nbsp;в&nbsp;телеге</h3>Присылает черновики в&nbsp;одну группу по&nbsp;темам, понимает голосовые и&nbsp;превращает длинную переписку в&nbsp;список задач, так&nbsp;что&nbsp;можно наговорить ему&nbsp;всё&nbsp;на&nbsp;бегу и&nbsp;выдохнуть.</div></div>
+      </div>
+      <div class="three" style="margin-top:22px">
+        <div class="win"><div class="bar"><i></i><b>урок 3.3</b></div><div class="in txt"><h3>сценарист рилс</h3>Кидаешь мысль голосовым или&nbsp;чужой рилс-образец, а&nbsp;он&nbsp;выдаёт сценарий: хук на&nbsp;первые 2&nbsp;секунды, что&nbsp;говорить, что&nbsp;показывать в&nbsp;кадре, подпись и&nbsp;обложку.</div></div>
+        <div class="win"><div class="bar"><i></i><b>урок 3.1</b></div><div class="in txt"><h3>главред «без&nbsp;нейронки»</h3>Вычищает «давайте разберёмся» и&nbsp;остальные ИИ-штампы, переписывает твоим голосом, и&nbsp;никто не&nbsp;скажет «это&nbsp;гпт&nbsp;писал»)))0</div></div>
+        <div class="win"><div class="bar"><i></i><b>урок 1.4</b></div><div class="in txt"><h3>ресёрчер</h3>Цены, конкуренты, сервисы: вместо вечера в&nbsp;гугле страница с&nbsp;выводом «что&nbsp;это значит и&nbsp;что&nbsp;делаем» и&nbsp;ссылками.</div></div>
+        <div class="win"><div class="bar"><i></i><b>урок Б.5</b></div><div class="in txt"><h3>справка о&nbsp;клиенте</h3>Перед созвоном собирает его&nbsp;соцсети, сайт, конкурентов и&nbsp;5&nbsp;вопросов, так&nbsp;что&nbsp;ты&nbsp;приходишь как&nbsp;человек, который уже&nbsp;всё&nbsp;про&nbsp;него знает.</div></div>
+        <div class="win"><div class="bar"><i></i><b>урок 2.4</b></div><div class="in txt"><h3>проверяльщик</h3>Перед словом «готово» сам&nbsp;открывает, пересчитывает и&nbsp;тыкает носом в&nbsp;косяки, пока их&nbsp;не&nbsp;увидел клиент.</div></div>
+        <div class="win"><div class="bar"><i></i><b>и&nbsp;ещё в&nbsp;папке</b></div><div class="in"><ul>
+          <li>файл твоего голоса и&nbsp;контент-план на&nbsp;месяц (неделя 3)</li>
+          <li>шаблон каруселей в&nbsp;твоих цветах (неделя 4)</li>
+          <li>упакованный профиль и&nbsp;пачка тредов на&nbsp;старт (неделя 5)</li>
+          <li>трекер привычек, который сам&nbsp;напоминает (Б.3)</li>
+          <li>26 файлов с&nbsp;готовыми запросами и&nbsp;скиллами: копируешь и&nbsp;подставляешь своё</li>
+        </ul></div></div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ПРОГРАММА -->
+<section id="programma">
+  <div class="wrap">
+    <h2 class="st mid" style="margin-bottom:40px">Что<span class="p">(внутри)</span></h2>
+    <div class="weeks">
+
+      <div class="wk">
+        <div class="side"><img class="ph" src="img/r58.jpg" alt="Ретро-фото: девушка за столом с лампой"><div><div class="n">Неделя 1</div><div class="wt">Учимся нормально разговаривать с&nbsp;чатом</div><span class="open">открывается 7.12</span></div></div>
+        <div class="win"><div class="bar"><i></i><b>неделя 1</b></div><div class="in txt"><div class="les">
+          <div class="l"><span class="d">1.1</span><span><b>План на&nbsp;завтра за&nbsp;2 минуты.</b> 23:40, в&nbsp;голове 48593 дела, и&nbsp;ты&nbsp;гоняешь их&nbsp;по&nbsp;кругу… Вываливаешь всё&nbsp;голосовым прямо в&nbsp;приложении, ничего ставить не&nbsp;надо, и&nbsp;утром у&nbsp;тебя не&nbsp;каша, а&nbsp;три&nbsp;дела, с&nbsp;которых начать. Заодно разбираемся, чем&nbsp;чат&nbsp;отличается от&nbsp;агента.</span></div>
+          <div class="l"><span class="d">1.2</span><span><b>Проект, который тебя помнит.</b> Пишем инструкцию о&nbsp;себе и&nbsp;закидываем твои файлы, чтобы больше не&nbsp;объяснять каждый раз, кто&nbsp;ты&nbsp;и&nbsp;чем&nbsp;занимаешься. На&nbsp;второй неделе перетащим её&nbsp;в&nbsp;клод код.</span></div>
+          <div class="l"><span class="d">1.3</span><span><b>Чтобы не&nbsp;было воды.</b> Шаблон задачи и&nbsp;три&nbsp;вопроса, после которых он&nbsp;перестаёт выдумывать, и&nbsp;привычка просить по&nbsp;шагам: план → шаг&nbsp;→ проверка. Сразу на&nbsp;практике: сообщение, на&nbsp;которое неловко отвечать → три&nbsp;варианта ответа, а&nbsp;договор → простыми словами, где&nbsp;подвох.</span></div>
+          <div class="l"><span class="d">1.4</span><span><b>Когда горит ВСЁ.</b> Раскладываем месяц на&nbsp;горит / важно / потом и&nbsp;считаем, сколько клиентов реально нужно на&nbsp;доход, который ты&nbsp;хочешь, вместо того чтобы паниковать. Итог страничкой по&nbsp;ссылке.</span></div>
+        </div><div class="out">план на&nbsp;завтра, проект о&nbsp;себе, шаблон задачи, план месяца</div></div></div>
+      </div>
+
+      <div class="wk">
+        <div class="side"><img class="ph" src="img/r30.jpg" alt="Ретро-фото: женщина работает за компьютером"><div><div class="n">Неделя 2</div><div class="wt">Агент на&nbsp;твоём компе</div><span class="open">открывается 14.12</span></div></div>
+        <div class="win"><div class="bar"><i></i><b>неделя 2</b></div><div class="in txt"><div class="les">
+          <div class="l"><span class="d">2.1</span><span><b>Ставим клод код&nbsp;и&nbsp;считаем деньги.</b> VS&nbsp;Code и&nbsp;клод код&nbsp;ставим вместе, показываю каждый клик (страшно только первые пять минут), и&nbsp;сразу первое дело: скрины переводов → табличка расходов за&nbsp;месяц, где&nbsp;видно, куда всё&nbsp;утекает.</span></div>
+          <div class="l"><span class="d">2.2</span><span><b>Главный файл агента.</b> CLAUDE.md, это&nbsp;файл с&nbsp;правилами, который агент перечитывает каждый раз, и&nbsp;границы: что&nbsp;он&nbsp;НЕ&nbsp;делает без&nbsp;твоего «да».</span></div>
+          <div class="l"><span class="d">2.3</span><span><b>Папки и&nbsp;память.</b> Жизнь / работа / входящие / архив, и&nbsp;агент сам&nbsp;разбирает твою помойку в&nbsp;«Загрузках». Сказал ему&nbsp;один раз&nbsp;«не&nbsp;так», и&nbsp;он&nbsp;это&nbsp;запомнил, а&nbsp;не&nbsp;косячит так&nbsp;же&nbsp;завтра.</span></div>
+          <div class="l"><span class="d">2.4</span><span><b>Лимит, модели и&nbsp;помощники.</b> Как&nbsp;не&nbsp;сидеть пять часов в&nbsp;ожидании, пока откроется лимит&nbsp;😭 /clear, /compact, /model и&nbsp;передачи между разговорами, какую модель брать на&nbsp;какое дело и&nbsp;два&nbsp;первых помощника: разведчик и&nbsp;проверяльщик.</span></div>
+          <div class="l"><span class="d">2.5</span><span><b>Скиллы: повторяющееся одной командой.</b><span class="new">новое</span> Скилл это&nbsp;сохранённый рецепт дела: пишешь короткую команду, и&nbsp;агент делает всё&nbsp;сам&nbsp;по&nbsp;твоим правилам. Мои&nbsp;примеры: утренний пост для&nbsp;клиента и&nbsp;карусель по&nbsp;шаблону. Задание: берёшь дело, которое делаешь уже&nbsp;третий раз, и&nbsp;превращаешь его&nbsp;в&nbsp;свой скилл.</span></div>
+        </div><div class="out">личный ассистент: папка, где&nbsp;агент тебя знает, таблица денег, помощники, первый скилл</div></div></div>
+      </div>
+
+      <div class="wk">
+        <div class="side"><img class="ph" src="img/r61.jpg" alt="Ретро-фото: женщина в офисе у компьютера"><div><div class="n">Неделя 3</div><div class="wt">Пишет как&nbsp;ты, а&nbsp;не как нейронка</div><span class="open">открывается 21.12</span></div></div>
+        <div class="win"><div class="bar"><i></i><b>неделя 3</b></div><div class="in txt"><div class="les">
+          <div class="l"><span class="d">3.1</span><span><b>Голос по&nbsp;твоим постам.</b> Агент читает, как&nbsp;ты&nbsp;пишешь, и&nbsp;собирает правила голоса в&nbsp;файл, плюс список ИИ-штампов, которые мы&nbsp;безжалостно вычёркиваем.</span></div>
+          <div class="l"><span class="d">3.2</span><span><b>Контент-план на&nbsp;месяц.</b> Рубрики, поводы и&nbsp;что&nbsp;когда выходит, только это&nbsp;уже&nbsp;не&nbsp;красивая табличка, которую ты&nbsp;закроешь, а&nbsp;план, по&nbsp;которому реально постишь.</span></div>
+          <div class="l"><span class="d">3.3</span><span><b>Рилс по&nbsp;чужому образцу.</b> Кидаешь ролик, который зацепил, агент разбирает его&nbsp;по&nbsp;кусочкам, и&nbsp;у&nbsp;тебя свой сценарий по&nbsp;фразам, где&nbsp;одна мысль от&nbsp;хука до&nbsp;финала.</span></div>
+          <div class="l"><span class="d">3.4</span><span><b>Идеи и&nbsp;сторис.</b> 30 хуков за&nbsp;один заход и&nbsp;сторис на&nbsp;3–4 кадра, потому что&nbsp;длинные серии всё&nbsp;равно никто не&nbsp;дочитывает)</span></div>
+        </div><div class="out">файл голоса, план на&nbsp;месяц, сценарий рилс</div></div></div>
+      </div>
+
+      <div class="wk">
+        <div class="side"><img class="ph" src="img/r53.jpg" alt="Ретро-фото: офис с компьютерами"><div><div class="n">Неделя 4</div><div class="wt">Карусели пачками, фигма, обложки</div><span class="open">открывается 4.01</span></div></div>
+        <div class="win"><div class="bar"><i></i><b>неделя 4</b></div><div class="in txt"><div class="les">
+          <div class="l"><span class="d">4.1</span><span><b>Карусели по&nbsp;шаблону.</b> Табличка с&nbsp;текстами → пачка PNG&nbsp;в&nbsp;твоих цветах. Я&nbsp;так&nbsp;для&nbsp;своего медиа делаю по&nbsp;3 карусели в&nbsp;день и&nbsp;сама их&nbsp;не&nbsp;собираю ВООБЩЕ.</span></div>
+          <div class="l"><span class="d">4.2</span><span><b>Свой стиль.</b> Цвета, шрифты, референсы и&nbsp;что&nbsp;делать, когда карусель получилась «как&nbsp;у&nbsp;всех» (а&nbsp;сначала она&nbsp;так&nbsp;и&nbsp;получится, это&nbsp;нормально).</span></div>
+          <div class="l"><span class="d">4.3</span><span><b>Клод рисует в&nbsp;твоей фигме.</b> От&nbsp;одного шаблона до&nbsp;30 штук прямо в&nbsp;твоём файле, пока ты&nbsp;пьёшь кофе.</span></div>
+          <div class="l"><span class="d">4.4</span><span><b>Обложки по&nbsp;референсу.</b> Зачёркнутое слово, фото с&nbsp;огромным заголовком, мем-картинка с&nbsp;подписью, то&nbsp;есть всё, на&nbsp;чём&nbsp;в&nbsp;ленте залипают.</span></div>
+        </div><div class="out">10+ каруселей за&nbsp;заход и&nbsp;обложки</div></div></div>
+      </div>
+
+      <div class="wk">
+        <div class="side"><img class="ph" src="img/r16.jpg" alt="Ретро-фото: люди у большого компьютера"><div><div class="n">Неделя 5</div><div class="wt">Личный бренд в&nbsp;инсте</div><span class="open">открывается 18.01</span></div></div>
+        <div class="win"><div class="bar"><i></i><b>неделя 5</b></div><div class="in txt"><div class="les">
+          <div class="l"><span class="d">5.1</span><span><b>О&nbsp;чём&nbsp;ты.</b> Агент читает твой канал или&nbsp;заметки и&nbsp;собирает копилку историй, а&nbsp;из&nbsp;неё&nbsp;три&nbsp;темы блога и&nbsp;ответ на&nbsp;вопрос «для&nbsp;кого я&nbsp;вообще пишу».</span></div>
+          <div class="l"><span class="d">5.2</span><span><b>Упаковка профиля.</b> Шапка в&nbsp;трёх вариантах, аватар, закреп, хайлайты и&nbsp;ссылка (я&nbsp;со&nbsp;своей упаковкой агентства морочилась два&nbsp;года, не&nbsp;повторяйте)</span></div>
+          <div class="l"><span class="d">5.3</span><span><b>Рилс про&nbsp;себя.</b> Берёшь историю из&nbsp;копилки, и&nbsp;из&nbsp;неё&nbsp;получается хук, одна мысль и&nbsp;монтажный лист: чёрный экран на&nbsp;повороте, титры, музыка по&nbsp;битам.</span></div>
+          <div class="l"><span class="d">5.4</span><span><b>Threads: бесплатный трафик.</b> 25 тредов из&nbsp;твоих постов за&nbsp;один заход и&nbsp;расписание по&nbsp;три&nbsp;в&nbsp;день.</span></div>
+        </div><div class="out">о&nbsp;чём&nbsp;ты, упакованный профиль, рилс про&nbsp;себя, 25 тредов</div></div></div>
+      </div>
+
+      <div class="wk bonus">
+        <div class="side"><img class="ph" src="img/r56.jpg" alt="Ретро-фото: женщина печатает сообщение"><div><div class="n">Бонусная неделя</div><div class="wt">Агент работает, пока ты&nbsp;занят</div><span class="open">открывается 11.01</span></div></div>
+        <div class="win"><div class="bar"><i></i><b>бонус</b></div><div class="in txt"><div class="les">
+          <div class="l"><span class="d">Б.1</span><span><b>Свой бот&nbsp;в&nbsp;телеге.</b> Присылает черновики в&nbsp;одну группу по&nbsp;темам, принимает голосовые, а&nbsp;длинная переписка превращается в&nbsp;список задач. У&nbsp;меня так&nbsp;все&nbsp;посты, карусели и&nbsp;сценарии прилетают в&nbsp;одну группу, и&nbsp;я&nbsp;их&nbsp;только проверяю.</span></div>
+          <div class="l"><span class="d">Б.2</span><span><b>Notion и&nbsp;Google.</b> Таблицы и&nbsp;календарь, которые агент заполняет сам, а&nbsp;ты&nbsp;только открываешь и&nbsp;смотришь.</span></div>
+          <div class="l"><span class="d">Б.3</span><span><b>Трекер привычек и&nbsp;всё&nbsp;по&nbsp;расписанию.</b> Вечером он&nbsp;сам&nbsp;спрашивает «сделал?», в&nbsp;воскресенье присылает итоги недели, а&nbsp;в&nbsp;конце месяца итоги по&nbsp;деньгам (страшно, но&nbsp;полезно)))0</span></div>
+          <div class="l"><span class="d">Б.4</span><span><b>Своя команда помощников.</b> Копирайтер → редактор → проверка, такой маленький отдел, только без&nbsp;зарплат. Продолжение уроков 2.4 и&nbsp;2.5.</span></div>
+          <div class="l"><span class="d">Б.5</span><span><b>Первые клиенты: агент ищет и&nbsp;пишет.</b> Агент собирает список бизнесов под&nbsp;твою услугу, находит про&nbsp;каждый одну конкретную вещь и&nbsp;готовит черновик сообщения в&nbsp;табличке, а&nbsp;ты&nbsp;проверяешь и&nbsp;отправляешь руками со&nbsp;своего аккаунта, без&nbsp;рассылок и&nbsp;ботов, потому что&nbsp;на&nbsp;«здравствуйте, я&nbsp;SMM-специалист» уже&nbsp;никто не&nbsp;отвечает&nbsp;🤡</span></div>
+        </div><div class="out">свой бот, рутина по&nbsp;расписанию, команда помощников, первые сообщения клиентам</div></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- УРОК + РАСПИСАНИЕ -->
+<section style="background:var(--paper-2)">
+  <div class="wrap" style="display:grid;gap:56px">
+    <div>
+      <h2 class="st mid" style="margin-bottom:34px">Урок<span class="p">(это)</span></h2>
+      <div class="lesson">
+        <div class="win"><div class="bar"><i></i><b>1</b></div><div class="in txt"><h3>Пост</h3>что&nbsp;делаем и&nbsp;зачем, на&nbsp;реальной ситуации из&nbsp;моей работы</div></div>
+        <div class="win"><div class="bar"><i></i><b>2</b></div><div class="in txt"><h3>Запись 5–7 минут</h3>показываю на&nbsp;своём экране, как&nbsp;делаю сама</div></div>
+        <div class="win"><div class="bar"><i></i><b>3</b></div><div class="in txt"><h3>Файл к&nbsp;уроку</h3>готовый запрос: копируешь и&nbsp;подставляешь своё</div></div>
+        <div class="win"><div class="bar"><i></i><b>4</b></div><div class="in txt"><h3>Разборы</h3>где&nbsp;обычно косячат и&nbsp;как&nbsp;это&nbsp;исправлять</div></div>
+      </div>
+    </div>
+    <div>
+      <h2 class="st mid" style="margin-bottom:34px">Когда<span class="p">(что)</span></h2>
+      <div class="win"><div class="bar"><i></i><b>расписание</b></div><div class="in"><div class="tbl"><table>
+        <tr><th>Дата</th><th>Что&nbsp;открывается</th><th>Уроков</th></tr>
+        <tr><td><b>пн&nbsp;7.12</b></td><td>неделя 1</td><td>4</td></tr>
+        <tr><td><b>пн&nbsp;14.12</b></td><td>неделя 2</td><td>5</td></tr>
+        <tr><td><b>пн&nbsp;21.12</b></td><td>неделя 3</td><td>4</td></tr>
+        <tr><td><b>28.12–3.01</b></td><td>праздники: можно догнать, новых уроков нет&nbsp;(оливье важнее)</td><td>—</td></tr>
+        <tr><td><b>пн&nbsp;4.01</b></td><td>неделя 4</td><td>4</td></tr>
+        <tr><td><b>пн&nbsp;11.01</b></td><td>бонусная неделя</td><td>5</td></tr>
+        <tr><td><b>пн&nbsp;18.01</b></td><td>неделя 5 «Личный бренд в&nbsp;инсте»</td><td>4</td></tr>
+      </table></div></div></div>
+      <p style="margin-top:20px;font-family:var(--mono);font-size:15px">Всего 26 уроков. Доступ остаётся, так&nbsp;что&nbsp;проходишь в&nbsp;своём темпе, никто не&nbsp;гонит.</p>
+    </div>
+  </div>
+</section>
+
+<!-- МНЕ ПИШУТ -->
+<section class="dm">
+  <div class="wrap">
+    <h2 class="st mid" style="margin-bottom:40px">Мне<span class="p">(пишут)</span></h2>
+    <div class="bubbles">
+      <p class="bb">когда обучение по&nbsp;клоду?</p>
+      <p class="bb r">научи меня Клоду</p>
+      <p class="bb">как&nbsp;ему правильно писать, чтобы выдавал по&nbsp;делу, а&nbsp;не&nbsp;воду</p>
+      <p class="bb r">хочу контент-план, всё&nbsp;подробно, а&nbsp;я&nbsp;выполняю</p>
+      <p class="bb">а&nbsp;нужна ли&nbsp;подписка? что&nbsp;даёт платная?</p>
+      <p class="bb r">а&nbsp;можешь со&nbsp;мной?</p>
+      <p class="bb">а&nbsp;сделай мне&nbsp;так&nbsp;же</p>
+    </div>
+    <p class="hand" style="margin-top:34px">поэтому и&nbsp;собрала всё&nbsp;в&nbsp;одно место</p>
+  </div>
+</section>
+
+<!-- А Я СПРАВЛЮСЬ -->
+<section class="faq">
+  <div class="wrap grid">
+    <div class="photo"><img class="ph" src="img/sonya-kofe.jpg" alt="Софья с кофе"></div>
+    <div class="q">
+      <h2 class="st mid"><span class="y">а&nbsp;я</span><br><span class="w">справлюсь?</span></h2>
+      <div class="win"><div class="bar"><i></i><b>я&nbsp;не&nbsp;программист</b></div><div class="in txt">Я&nbsp;тоже, и&nbsp;код&nbsp;не&nbsp;пишу ВООБЩЕ. Всё&nbsp;ставим вместе, на&nbsp;видео показываю каждый клик, а&nbsp;первая неделя вообще идёт в&nbsp;обычном приложении, где&nbsp;ничего устанавливать не&nbsp;надо.</div></div>
+      <div class="win"><div class="bar"><i></i><b>нет&nbsp;$100 на&nbsp;подписку</b></div><div class="in txt">И&nbsp;не&nbsp;надо. Для&nbsp;интенсива хватает Pro, это&nbsp;около $20 в&nbsp;месяц, мне&nbsp;его&nbsp;хватает на&nbsp;всю&nbsp;работу, если не&nbsp;жечь лимит. А&nbsp;первую неделю можно пройти ещё&nbsp;до&nbsp;того, как&nbsp;купишь подписку.</div></div>
+      <div class="win"><div class="bar"><i></i><b>некогда разбираться</b></div><div class="in txt">Запись урока 5–7 минут, к&nbsp;ней&nbsp;готовый запрос, который просто копируешь, и&nbsp;доступ остаётся, так&nbsp;что&nbsp;проходишь в&nbsp;своём темпе.</div></div>
+      <div class="win"><div class="bar"><i></i><b>пишет как&nbsp;нейронка</b></div><div class="in txt">Потому что&nbsp;он&nbsp;тебя ещё&nbsp;не&nbsp;знает. Целая неделя 3 про&nbsp;это: агент собирает твой голос по&nbsp;твоим постам, и&nbsp;мы&nbsp;вычёркиваем все&nbsp;ИИ-штампы.</div></div>
+      <div class="win"><div class="bar"><i></i><b>какой нужен комп</b></div><div class="in txt">Любой мак&nbsp;или&nbsp;Windows.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ФИНАЛ -->
+<section>
+  <div class="wrap final">
+    <div style="display:grid;gap:22px">
+      <h2 class="st mid">Заходишь<span class="p">(7.12)</span></h2>
+      <div class="price">3 990 ₽</div>
+      <p class="lead">Один раз, без&nbsp;подписки. 21 урок и&nbsp;5 бонусных, файлы с&nbsp;готовыми запросами и&nbsp;разборы твоих задач в&nbsp;комментах. Пиши в&nbsp;канал, там&nbsp;все&nbsp;новости и&nbsp;как&nbsp;попасть, а&nbsp;как&nbsp;я&nbsp;живу с&nbsp;агентом каждый день, смотри в&nbsp;инсте <a class="ig" href="https://instagram.com/soldysofa" target="_blank" rel="noopener">@soldysofa</a>.</p>
+      <div class="cta-row">
+        <a class="btn" href="https://t.me/schas_razberus" target="_blank" rel="noopener">Хочу на&nbsp;интенсив →</a>
+        <a class="btn alt" href="#programma">Ещё&nbsp;раз&nbsp;программу</a>
+      </div>
+    </div>
+    <div><span class="num">(3)</span><img class="ph" src="img/r45.jpg" alt="Ретро-фото: женщина с компьютером на коленях"></div>
+  </div>
+  <div class="wrap tariffs">
+    <span class="hand">а&nbsp;если хочется со&nbsp;мной</span>
+    <div class="three">
+      <div class="win"><div class="bar"><i></i><b>со&nbsp;мной · 3&nbsp;места</b></div><div class="in txt">
+        <h3>Наставничество</h3>
+        <div class="tp">25 000 ₽ <s>35 000</s></div>
+        <p class="tn">25 000 до&nbsp;30.11, потом 35 000, бронь места 10 000</p>
+        <p>По&nbsp;SMM с&nbsp;автоматизацией работы «до&nbsp;первого клиента». 6 недель с&nbsp;8.12, я&nbsp;рядом на&nbsp;каждом шаге и&nbsp;довожу до&nbsp;первого клиента.</p>
+      </div></div>
+      <div class="win"><div class="bar"><i></i><b>за&nbsp;тебя · для&nbsp;себя</b></div><div class="in txt">
+        <h3>Настройка для&nbsp;себя</h3>
+        <div class="tp">10 000 ₽</div>
+        <p class="tn">один созвон, 10 мест в&nbsp;декабре</p>
+        <p>Наводим порядок: папки, доска задач, Клод узнаёт про&nbsp;тебя всё, что&nbsp;нужно, и&nbsp;сажаем его&nbsp;на&nbsp;одну рутину, чтобы он&nbsp;делал её&nbsp;сам. Неделю после отвечаю на&nbsp;вопросы.</p>
+      </div></div>
+      <div class="win"><div class="bar"><i></i><b>за&nbsp;тебя · для&nbsp;бизнеса</b></div><div class="in txt">
+        <h3>Настройка для&nbsp;бизнеса</h3>
+        <div class="tp">30 000 ₽</div>
+        <p class="tn">два созвона, 3 места в&nbsp;декабре</p>
+        <p>То&nbsp;же&nbsp;самое плюс порядок в&nbsp;работе команды и&nbsp;агент с&nbsp;помощниками на&nbsp;ваши рабочие задачи. Две&nbsp;недели вопросов.</p>
+      </div></div>
+    </div>
+    <p class="tn" style="margin-top:22px">Пиши в&nbsp;канал или&nbsp;в&nbsp;личку <a href="https://t.me/lordywood" target="_blank" rel="noopener">@lordywood</a>, расскажу, что&nbsp;подойдёт именно тебе.</p>
+  </div>
+</section>
+
+<script>
+/* окно «чат → агент»: на середине прокрутки блока переключается на агента; по табам можно щёлкнуть */
+(function(){
+  var ca=document.getElementById('ca'); if(!ca) return;
+  var tabs=ca.querySelectorAll('[data-m]'), title=ca.querySelector('.ca-title');
+  function set(agent){
+    ca.classList.toggle('agent',agent);
+    tabs.forEach(function(t){t.setAttribute('aria-selected',String((t.dataset.m==='agent')===agent))});
+    title.textContent=agent?'агент · делает сам':'чат · просто отвечает';
+  }
+  function prog(){
+    var r=ca.getBoundingClientRect(), span=r.height-innerHeight;
+    return span>0?Math.min(1,Math.max(0,-r.top/span)):(r.top<innerHeight/2?1:0);
+  }
+  var ticking=false;
+  function onScroll(){ if(ticking) return; ticking=true; requestAnimationFrame(function(){
+    var p=prog(); ca.style.setProperty('--p',(p*100).toFixed(1)+'%'); set(p>.45); ticking=false; }); }
+  addEventListener('scroll',onScroll,{passive:true}); addEventListener('resize',onScroll); onScroll();
+  tabs.forEach(function(t){t.addEventListener('click',function(){
+    var top=ca.getBoundingClientRect().top+scrollY, span=ca.offsetHeight-innerHeight;
+    scrollTo({top:top+(t.dataset.m==='agent'?span*.7:0),behavior:'smooth'});
+  })});
+})();
+</script>
+<script>
+/* телефон: окно в середине экрана = как при наведении; окна и фото выезжают снизу при прокрутке */
+(function(){
+  if(!matchMedia('(hover:none)').matches) return;
+  var wins=[].slice.call(document.querySelectorAll('.win')).filter(function(w){return !w.classList.contains('ca-win')});
+  var calm=matchMedia('(prefers-reduced-motion:reduce)').matches, rv=[];
+  if(!calm){
+    document.documentElement.classList.add('mob');
+    wins.concat([].slice.call(document.querySelectorAll('.ph'))).forEach(function(el){
+      if(el.getBoundingClientRect().top<innerHeight) return; /* первый экран — без анимации */
+      el.classList.add('rv'); rv.push(el);
+    });
+  }
+  var ticking=false;
+  function check(){
+    ticking=false; var h=innerHeight, mid=h/2;
+    var best=null,bd=1e9;
+    wins.forEach(function(w){var r=w.getBoundingClientRect();if(r.top<mid+h*.1&&r.bottom>mid-h*.1){var d=Math.abs((r.top+r.bottom)/2-mid);if(d<bd){bd=d;best=w}}});
+    wins.forEach(function(w){w.classList.toggle('live',w===best)});
+    rv=rv.filter(function(el){if(el.getBoundingClientRect().top<h*.92){el.classList.add('on');return false}return true});
+  }
+  function on(){if(!ticking){ticking=true;requestAnimationFrame(check)}}
+  addEventListener('scroll',on,{passive:true}); addEventListener('resize',on); check();
+})();
+</script>
+
+<footer class="wrap"><div class="logo">щас&nbsp;разберусь<span>by&nbsp;Софья</span></div>
+  <div class="contacts"><a href="https://instagram.com/soldysofa" target="_blank" rel="noopener"><small>инст</small>@soldysofa</a><a href="https://t.me/soldysofa" target="_blank" rel="noopener"><small>личный тгк</small>@soldysofa</a><a href="https://t.me/schas_razberus" target="_blank" rel="noopener"><small>канал курса</small>@schas_razberus</a></div>
+</footer>
