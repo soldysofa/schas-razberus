@@ -279,6 +279,47 @@ section{padding-block:84px}
 .bb:not(.r):nth-child(3n){background:var(--yellow)}
 .day>*,.lesson>*,.wk>*,.les .l>*,.wrap>*,.say>*,.three>*{min-width:0}
 @media (max-width:520px){.st.mid{font-size:30px}.st.big{font-size:36px}.st{overflow-wrap:break-word;hyphens:auto}.wk .wt{font-size:21px;overflow-wrap:break-word;hyphens:auto}.win .in{padding:14px}.win{box-shadow:5px 5px 0 var(--ink)}}
+
+/* тест 26.11: меньше текста, больше воздуха */
+section{padding-block:120px}
+@media (max-width:820px){section{padding-block:76px}}
+.hero{padding-bottom:84px}
+.hero .txt{display:grid;gap:26px}
+.lead{line-height:1.6}
+.note{margin:0;max-width:52ch;border:2px solid var(--ink);border-left:8px solid var(--pink);background:var(--win);padding:12px 16px;font:14.5px/1.5 var(--mono)}
+.head{margin-bottom:60px}
+.three,.two{gap:40px}
+.say{margin-top:72px}
+.weeks{gap:56px!important}
+.wk .les{max-height:180px;overflow:hidden;position:relative}
+.wk .les::after{content:"";position:absolute;left:0;right:0;bottom:0;height:100px;background:linear-gradient(to bottom,rgba(251,247,238,0),var(--win) 85%);pointer-events:none}
+.wk.open .les{max-height:none}
+.wk.open .les::after{display:none}
+.les{gap:10px}
+.more-btn{margin-top:18px;width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--pink);color:#fff;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:12px 18px;font:800 clamp(16px,2vw,19px)/1.2 var(--display);cursor:pointer;text-align:left}
+.more-btn .ar{font-size:1.3em;line-height:1;animation:ml-bob 1.4s ease-in-out infinite}
+.wk.open .more-btn,.peek.open .more-btn{background:var(--ink)}
+.peek.open .more-btn .ar,.wk.open .more-btn .ar{transform:rotate(180deg);animation:none}
+.more-btn:hover{background:var(--ink)}
+@media (prefers-reduced-motion:reduce){.more-btn .ar{animation:none}}
+.more-list{margin-top:40px}
+.more-list summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px}
+.more-list summary::-webkit-details-marker{display:none}
+.more-list .ml-sum{background:var(--pink);color:#fff;padding:16px 20px;gap:14px;font:800 clamp(17px,2.2vw,22px)/1.2 var(--display);letter-spacing:-.01em}
+.more-list .ml-t{flex:1}
+.more-list .ar{font-size:1.4em;line-height:1;animation:ml-bob 1.4s ease-in-out infinite}
+.more-list .tg{font:700 13px var(--mono);background:#fff;color:var(--pink);border:2px solid var(--ink);padding:4px 10px;white-space:nowrap}
+.more-list[open] .ar{transform:rotate(180deg);animation:none}
+.more-list[open] .tg{display:none}
+.more-list:hover .ml-sum{background:var(--ink)}
+@keyframes ml-bob{50%{translate:0 4px}}
+@media (max-width:520px){.more-list .tg{display:none}}
+@media (prefers-reduced-motion:reduce){.more-list .ar{animation:none}}
+.peek{margin-top:40px}
+.peek>.lst{max-height:150px;overflow:hidden;position:relative}
+.peek>.lst::after{content:"";position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(to bottom,rgba(251,247,238,0),var(--win) 85%);pointer-events:none}
+.peek.open>.in:first-of-type{max-height:none}
+.peek.open>.in:first-of-type::after{display:none}
 </style>
 
 <div class="wrap">
@@ -292,7 +333,7 @@ section{padding-block:84px}
   <header class="hero">
     <div class="txt">
       <p class="lead">Я&nbsp;маркетолог и&nbsp;код&nbsp;не&nbsp;пишу <b>ВООБЩЕ</b>, а&nbsp;за&nbsp;меня щас&nbsp;работает отдел из&nbsp;<b>18&nbsp;агентов</b> (звучит пафосно, но&nbsp;по&nbsp;факту это&nbsp;папка на&nbsp;компе и&nbsp;куча файлов с&nbsp;правилами))</p>
-      <p class="lead">В&nbsp;интенсиве я&nbsp;на&nbsp;своих реальных задачах показываю, как&nbsp;собрать такого помощника себе, чтобы тексты, планы, таблицы, карусели и&nbsp;поиск клиентов делал он, а&nbsp;ты&nbsp;только проверял и&nbsp;жал&nbsp;«отправить».</p>
+      <p class="note">В&nbsp;интенсиве на&nbsp;своих задачах показываю, как&nbsp;собрать такого помощника себе, чтобы тексты, таблицы, карусели и&nbsp;поиск клиентов делал он, а&nbsp;ты&nbsp;только жал&nbsp;«отправить».</p>
       <div class="facts"><span>старт пн&nbsp;7.12</span><span>5 недель + бонусная</span><span>21 урок + 5 бонусных</span><span>онлайн</span></div>
       <div class="cta-row">
         <a class="btn" href="https://t.me/schas_razberus" target="_blank" rel="noopener">Хочу на&nbsp;интенсив →</a>
@@ -332,7 +373,7 @@ section{padding-block:84px}
     <div class="head">
       <div style="display:grid;gap:20px">
         <h2 class="st mid">Чат<span class="p">(или&nbsp;агент)</span></h2>
-        <p class="lead">Ситуэйшен: просишь гпт&nbsp;сделать контент-план, он&nbsp;выдаёт красивую табличку, ты&nbsp;её&nbsp;закрываешь и&nbsp;ничего не&nbsp;меняется&nbsp;🤡 Чат&nbsp;советует, а&nbsp;дальше всё&nbsp;руками, а&nbsp;агент сам&nbsp;берёт и&nbsp;делает.</p>
+        <p class="lead">Чат&nbsp;советует, а&nbsp;дальше всё&nbsp;руками, а&nbsp;агент сам&nbsp;берёт и&nbsp;делает.</p>
       </div>
       <div><span class="num">(1)</span><img class="ph" src="img/r11.jpg" alt="Ретро-фото: женщина за старым компьютером"></div>
     </div>
@@ -372,9 +413,9 @@ section{padding-block:84px}
       </div>
     </div>
     <div class="three">
-      <div class="win"><div class="bar"><i></i><b>помнит</b></div><div class="in txt"><h3>Помнит тебя</h3>Знает, чем&nbsp;ты&nbsp;занимаешься, как&nbsp;ты&nbsp;пишешь и&nbsp;что&nbsp;ты&nbsp;ему&nbsp;уже&nbsp;запретил, так&nbsp;что&nbsp;объяснять всё&nbsp;заново в&nbsp;каждом новом чате больше не&nbsp;придётся.</div></div>
-      <div class="win"><div class="bar"><i></i><b>делает</b></div><div class="in txt"><h3>Делает сам</h3>Сам&nbsp;создаёт файлы, раскладывает папки, собирает таблицы и&nbsp;картинки, а&nbsp;дело, которое ты&nbsp;делаешь каждую неделю, запускается одной командой.</div></div>
-      <div class="win"><div class="bar"><i></i><b>читает</b></div><div class="in txt"><h3>Читает документы</h3>Договор, PDF, скрины переводов, выгрузки из&nbsp;соцсетей: объяснит простыми словами и&nbsp;сведёт всё&nbsp;в&nbsp;одну табличку. Я&nbsp;перед поездкой в&nbsp;Россию попросила его&nbsp;проверить мои&nbsp;переписки за&nbsp;несколько лет, и&nbsp;он&nbsp;всё&nbsp;нашёл)))0</div></div>
+      <div class="win"><div class="bar"><i></i><b>помнит</b></div><div class="in txt"><h3>Помнит тебя</h3>Знает, чем&nbsp;ты&nbsp;занимаешься и&nbsp;как&nbsp;пишешь, так&nbsp;что&nbsp;объяснять всё&nbsp;заново в&nbsp;каждом чате больше не&nbsp;придётся.</div></div>
+      <div class="win"><div class="bar"><i></i><b>делает</b></div><div class="in txt"><h3>Делает сам</h3>Сам&nbsp;собирает файлы, таблицы и&nbsp;картинки, а&nbsp;дело, которое повторяется каждую неделю, запускается одной командой.</div></div>
+      <div class="win"><div class="bar"><i></i><b>читает</b></div><div class="in txt"><h3>Читает документы</h3>Договор, PDF, скрины переводов объяснит простыми словами. Я&nbsp;так&nbsp;перед поездкой в&nbsp;Россию проверила переписки за&nbsp;несколько лет)))0</div></div>
     </div>
   </div>
 </section>
@@ -385,7 +426,7 @@ section{padding-block:84px}
     <div class="head">
       <div style="display:grid;gap:20px">
         <h2 class="st mid">Мой<span class="p">(день)</span></h2>
-        <p class="lead">Вот&nbsp;как&nbsp;это&nbsp;выглядит у&nbsp;меня в&nbsp;обычный день. Но&nbsp;естественно, я&nbsp;его&nbsp;сначала обучила и&nbsp;настроила, и&nbsp;<span class="mark">докручиваю каждый день, когда он&nbsp;косячит</span>, вот&nbsp;этому и&nbsp;буду учить.</p>
+        <p class="lead">Мой обычный день. Сначала я&nbsp;его&nbsp;обучила и&nbsp;настроила, и&nbsp;<span class="mark">докручиваю каждый день, когда он&nbsp;косячит</span>, вот&nbsp;этому и&nbsp;буду учить.</p>
       </div>
       <div><span class="num">(2)</span><img class="ph" src="img/r51.jpg" alt="Ретро-фото: женщина печатает за компьютером в офисе"></div>
     </div>
@@ -395,7 +436,7 @@ section{padding-block:84px}
       <div class="win"><div class="bar"><i></i><b>вечер</b></div><div class="in txt"><div class="t">вечер</div><p style="margin-top:8px">Собирает карусели для&nbsp;моего медиа, по&nbsp;3 в&nbsp;день, и&nbsp;рилсы из&nbsp;них.</p></div></div>
       <div class="win"><div class="bar"><i></i><b>ночь</b></div><div class="in txt"><div class="t">перед сном</div><p style="margin-top:8px">Вываливаю ему&nbsp;всё, что&nbsp;в&nbsp;голове на&nbsp;завтра, и&nbsp;утром у&nbsp;меня три&nbsp;дела, с&nbsp;которых начать.</p></div></div>
     </div>
-    <div class="win" style="margin-top:26px"><div class="bar"><i></i><b>а&nbsp;ещё&nbsp;днём мы&nbsp;с&nbsp;ним</b></div><div class="in"><ul>
+    <div class="win peek"><div class="bar"><i></i><b>а&nbsp;ещё&nbsp;днём мы&nbsp;с&nbsp;ним делаем минимум 12&nbsp;дел</b></div><div class="in lst"><ul>
       <li>делаем карусели клиентам в&nbsp;их&nbsp;стиле и&nbsp;по&nbsp;нужным смыслам</li>
       <li>монтируем рилсы по&nbsp;моим рефам и&nbsp;под&nbsp;музыку</li>
       <li>собираем мою упаковку: описания, обложки, ленту</li>
@@ -408,7 +449,7 @@ section{padding-block:84px}
       <li>считаем, что&nbsp;и&nbsp;когда платить до&nbsp;конца года</li>
       <li>разбираемся в&nbsp;том, чего я&nbsp;не&nbsp;понимаю</li>
       <li class="ok">ищем, кому написать, и&nbsp;пишем новым клиентам</li>
-    </ul></div></div>
+    </ul></div><div class="in" style="padding-top:0"><button type="button" class="more-btn" data-c="показать все 12 дел" data-o="свернуть"><span class="ar">↓</span><span class="mt">показать все 12&nbsp;дел</span><span class="ar">↓</span></button></div></div>
   </div>
 </section>
 
@@ -418,29 +459,29 @@ section{padding-block:84px}
     <h2 class="st mid" style="margin-bottom:34px">Это<span class="p">(для&nbsp;тебя)</span></h2>
     <div class="two">
       <div class="win"><div class="bar"><i></i><b>для&nbsp;кого</b></div><div class="in"><ul>
-        <li>с&nbsp;нуля, программировать не&nbsp;нужно ВООБЩЕ, всё&nbsp;ставим вместе, на&nbsp;видео показываю каждый клик</li>
+        <li>с&nbsp;нуля, программировать не&nbsp;нужно ВООБЩЕ, каждый клик на&nbsp;видео</li>
         <li>маркетологи, смм-щики, блогеры, фрилансеры и&nbsp;все, у&nbsp;кого рутины на&nbsp;48593 часа в&nbsp;неделю</li>
-        <li class="ok">уже&nbsp;пробовал гпт&nbsp;или&nbsp;Клода, а&nbsp;дальше всё&nbsp;равно делал всё&nbsp;руками (узнал себя? я&nbsp;тоже так&nbsp;жила)</li>
+        <li class="ok">уже&nbsp;пробовал гпт&nbsp;или&nbsp;Клода, а&nbsp;делал всё&nbsp;равно руками (я&nbsp;тоже так&nbsp;жила)</li>
       </ul></div></div>
       <div class="win"><div class="bar"><i></i><b>как&nbsp;проходит</b></div><div class="in"><ul>
-        <li>практика на&nbsp;твоих задачах, никаких учебных «представим, что&nbsp;у&nbsp;вас&nbsp;кофейня»</li>
-        <li>после каждого урока у&nbsp;тебя готовая штука: табличка расходов, шаблон каруселей, бот, и&nbsp;она работает дальше уже без&nbsp;меня</li>
-        <li class="ok">учимся нормально просить: план → шаг&nbsp;→ проверка, и&nbsp;агент перестаёт тупить</li>
+        <li>практика на&nbsp;твоих задачах, без&nbsp;«представим, что&nbsp;у&nbsp;вас&nbsp;кофейня»</li>
+        <li>после каждого урока готовая штука, которая работает дальше уже без&nbsp;меня</li>
+        <li class="ok">просим по&nbsp;схеме план → шаг&nbsp;→ проверка, и&nbsp;агент перестаёт тупить</li>
       </ul></div></div>
     </div>
     <div class="say" style="grid-template-columns:1fr">
       <span class="hand" style="margin-bottom:10px">что&nbsp;останется у&nbsp;тебя</span>
       <div>
       <div class="two">
-        <div class="win"><div class="bar"><i></i><b>вещь 1 · недели 1–2</b></div><div class="in txt"><h3>Личный ассистент</h3>Агент на&nbsp;твоём компе, который знает тебя, держит порядок в&nbsp;папках, ведёт таблицу денег (да, теперь будет видно, куда они&nbsp;утекают) и&nbsp;запускает твои дела одной командой.</div></div>
-        <div class="win"><div class="bar"><i></i><b>вещь 2 · бонусная неделя</b></div><div class="in txt"><h3>Свой бот&nbsp;в&nbsp;телеге</h3>Присылает черновики в&nbsp;одну группу по&nbsp;темам, понимает голосовые и&nbsp;превращает длинную переписку в&nbsp;список задач, так&nbsp;что&nbsp;можно наговорить ему&nbsp;всё&nbsp;на&nbsp;бегу и&nbsp;выдохнуть.</div></div>
+        <div class="win"><div class="bar"><i></i><b>вещь 1 · недели 1–2</b></div><div class="in txt"><h3>Личный ассистент</h3>Агент на&nbsp;твоём компе, который знает тебя, держит порядок в&nbsp;папках и&nbsp;ведёт таблицу денег (да, теперь видно, куда они&nbsp;утекают).</div></div>
+        <div class="win"><div class="bar"><i></i><b>вещь 2 · бонусная неделя</b></div><div class="in txt"><h3>Свой бот-ассистент в&nbsp;телеге</h3>Понимает голосовые и&nbsp;присылает черновики в&nbsp;одну группу, так&nbsp;что&nbsp;можно наговорить ему&nbsp;всё&nbsp;на&nbsp;бегу и&nbsp;выдохнуть.</div></div>
       </div>
       <div class="three" style="margin-top:22px">
-        <div class="win"><div class="bar"><i></i><b>урок 3.3</b></div><div class="in txt"><h3>сценарист рилс</h3>Кидаешь мысль голосовым или&nbsp;чужой рилс-образец, а&nbsp;он&nbsp;выдаёт сценарий: хук на&nbsp;первые 2&nbsp;секунды, что&nbsp;говорить, что&nbsp;показывать в&nbsp;кадре, подпись и&nbsp;обложку.</div></div>
-        <div class="win"><div class="bar"><i></i><b>урок 3.1</b></div><div class="in txt"><h3>главред «без&nbsp;нейронки»</h3>Вычищает «давайте разберёмся» и&nbsp;остальные ИИ-штампы, переписывает твоим голосом, и&nbsp;никто не&nbsp;скажет «это&nbsp;гпт&nbsp;писал»)))0</div></div>
-        <div class="win"><div class="bar"><i></i><b>урок 1.4</b></div><div class="in txt"><h3>ресёрчер</h3>Цены, конкуренты, сервисы: вместо вечера в&nbsp;гугле страница с&nbsp;выводом «что&nbsp;это значит и&nbsp;что&nbsp;делаем» и&nbsp;ссылками.</div></div>
-        <div class="win"><div class="bar"><i></i><b>урок Б.5</b></div><div class="in txt"><h3>справка о&nbsp;клиенте</h3>Перед созвоном собирает его&nbsp;соцсети, сайт, конкурентов и&nbsp;5&nbsp;вопросов, так&nbsp;что&nbsp;ты&nbsp;приходишь как&nbsp;человек, который уже&nbsp;всё&nbsp;про&nbsp;него знает.</div></div>
-        <div class="win"><div class="bar"><i></i><b>урок 2.4</b></div><div class="in txt"><h3>проверяльщик</h3>Перед словом «готово» сам&nbsp;открывает, пересчитывает и&nbsp;тыкает носом в&nbsp;косяки, пока их&nbsp;не&nbsp;увидел клиент.</div></div>
+        <div class="win"><div class="bar"><i></i><b>урок 3.3</b></div><div class="in txt"><h3>сценарист рилс</h3>Кидаешь мысль голосовым или&nbsp;чужой рилс, получаешь сценарий с&nbsp;хуком, кадрами и&nbsp;подписью.</div></div>
+        <div class="win"><div class="bar"><i></i><b>урок 3.1</b></div><div class="in txt"><h3>главред «без&nbsp;нейронки»</h3>Вычищает ИИ-штампы, и&nbsp;никто не&nbsp;скажет «это&nbsp;гпт&nbsp;писал»)))0</div></div>
+        <div class="win"><div class="bar"><i></i><b>урок 1.4</b></div><div class="in txt"><h3>ресёрчер</h3>Вместо вечера в&nbsp;гугле страница с&nbsp;выводом и&nbsp;ссылками.</div></div>
+        <div class="win"><div class="bar"><i></i><b>урок Б.5</b></div><div class="in txt"><h3>справка о&nbsp;клиенте</h3>Перед созвоном собирает всё&nbsp;про&nbsp;клиента и&nbsp;5&nbsp;вопросов к&nbsp;нему.</div></div>
+        <div class="win"><div class="bar"><i></i><b>урок 2.4</b></div><div class="in txt"><h3>проверяльщик</h3>Перед «готово» сам&nbsp;пересчитывает и&nbsp;тыкает носом в&nbsp;косяки.</div></div>
         <div class="win"><div class="bar"><i></i><b>и&nbsp;ещё в&nbsp;папке</b></div><div class="in"><ul>
           <li>файл твоего голоса и&nbsp;контент-план на&nbsp;месяц (неделя 3)</li>
           <li>шаблон каруселей в&nbsp;твоих цветах (неделя 4)</li>
@@ -463,63 +504,63 @@ section{padding-block:84px}
       <div class="wk">
         <div class="side"><img class="ph" src="img/r58.jpg" alt="Ретро-фото: девушка за столом с лампой"><div><div class="n">Неделя 1</div><div class="wt">Учимся нормально разговаривать с&nbsp;чатом</div><span class="open">открывается 7.12</span></div></div>
         <div class="win"><div class="bar"><i></i><b>неделя 1</b></div><div class="in txt"><div class="les">
-          <div class="l"><span class="d">1.1</span><span><b>План на&nbsp;завтра за&nbsp;2 минуты.</b> 23:40, в&nbsp;голове 48593 дела, и&nbsp;ты&nbsp;гоняешь их&nbsp;по&nbsp;кругу… Вываливаешь всё&nbsp;голосовым прямо в&nbsp;приложении, ничего ставить не&nbsp;надо, и&nbsp;утром у&nbsp;тебя не&nbsp;каша, а&nbsp;три&nbsp;дела, с&nbsp;которых начать. Заодно разбираемся, чем&nbsp;чат&nbsp;отличается от&nbsp;агента.</span></div>
-          <div class="l"><span class="d">1.2</span><span><b>Проект, который тебя помнит.</b> Пишем инструкцию о&nbsp;себе и&nbsp;закидываем твои файлы, чтобы больше не&nbsp;объяснять каждый раз, кто&nbsp;ты&nbsp;и&nbsp;чем&nbsp;занимаешься. На&nbsp;второй неделе перетащим её&nbsp;в&nbsp;клод код.</span></div>
-          <div class="l"><span class="d">1.3</span><span><b>Чтобы не&nbsp;было воды.</b> Шаблон задачи и&nbsp;три&nbsp;вопроса, после которых он&nbsp;перестаёт выдумывать, и&nbsp;привычка просить по&nbsp;шагам: план → шаг&nbsp;→ проверка. Сразу на&nbsp;практике: сообщение, на&nbsp;которое неловко отвечать → три&nbsp;варианта ответа, а&nbsp;договор → простыми словами, где&nbsp;подвох.</span></div>
-          <div class="l"><span class="d">1.4</span><span><b>Когда горит ВСЁ.</b> Раскладываем месяц на&nbsp;горит / важно / потом и&nbsp;считаем, сколько клиентов реально нужно на&nbsp;доход, который ты&nbsp;хочешь, вместо того чтобы паниковать. Итог страничкой по&nbsp;ссылке.</span></div>
-        </div><div class="out">план на&nbsp;завтра, проект о&nbsp;себе, шаблон задачи, план месяца</div></div></div>
+          <div class="l"><span class="d">1.1</span><span><b>План на&nbsp;день и&nbsp;неделю за&nbsp;2 минуты.</b><span class="x"> 23:40, в&nbsp;голове 48593 дела, и&nbsp;ты&nbsp;гоняешь их&nbsp;по&nbsp;кругу… Вываливаешь всё&nbsp;голосовым прямо в&nbsp;приложении, ничего ставить не&nbsp;надо, и&nbsp;утром у&nbsp;тебя не&nbsp;каша, а&nbsp;три&nbsp;дела, с&nbsp;которых начать. Заодно разбираемся, чем&nbsp;чат&nbsp;отличается от&nbsp;агента.</span></span></div>
+          <div class="l"><span class="d">1.2</span><span><b>Проект, который запоминает тебя: как&nbsp;тебе надо и&nbsp;что&nbsp;ты&nbsp;делаешь.</b><span class="x"> Пишем инструкцию о&nbsp;себе и&nbsp;закидываем твои файлы, чтобы больше не&nbsp;объяснять каждый раз, кто&nbsp;ты&nbsp;и&nbsp;чем&nbsp;занимаешься. На&nbsp;второй неделе перетащим её&nbsp;в&nbsp;клод код.</span></span></div>
+          <div class="l"><span class="d">1.3</span><span><b>Как&nbsp;писать, чтобы не&nbsp;было воды.</b><span class="x"> Шаблон задачи и&nbsp;три&nbsp;вопроса, после которых он&nbsp;перестаёт выдумывать, и&nbsp;привычка просить по&nbsp;шагам: план → шаг&nbsp;→ проверка. Сразу на&nbsp;практике: сообщение, на&nbsp;которое неловко отвечать → три&nbsp;варианта ответа, а&nbsp;договор → простыми словами, где&nbsp;подвох.</span></span></div>
+          <div class="l"><span class="d">1.4</span><span><b>Что&nbsp;делать, когда горит ВСЁ.</b><span class="x"> Раскладываем месяц на&nbsp;горит / важно / потом и&nbsp;считаем, сколько клиентов реально нужно на&nbsp;доход, который ты&nbsp;хочешь, вместо того чтобы паниковать. Итог страничкой по&nbsp;ссылке.</span></span></div>
+        </div><button type="button" class="more-btn"><span class="ar">↓</span><span class="mt">показать все уроки недели</span><span class="ar">↓</span></button><div class="out">план на&nbsp;завтра, проект о&nbsp;себе, шаблон задачи, план месяца</div></div></div>
       </div>
 
       <div class="wk">
         <div class="side"><img class="ph" src="img/r30.jpg" alt="Ретро-фото: женщина работает за компьютером"><div><div class="n">Неделя 2</div><div class="wt">Агент на&nbsp;твоём компе</div><span class="open">открывается 14.12</span></div></div>
         <div class="win"><div class="bar"><i></i><b>неделя 2</b></div><div class="in txt"><div class="les">
-          <div class="l"><span class="d">2.1</span><span><b>Ставим клод код&nbsp;и&nbsp;считаем деньги.</b> VS&nbsp;Code и&nbsp;клод код&nbsp;ставим вместе, показываю каждый клик (страшно только первые пять минут), и&nbsp;сразу первое дело: скрины переводов → табличка расходов за&nbsp;месяц, где&nbsp;видно, куда всё&nbsp;утекает.</span></div>
-          <div class="l"><span class="d">2.2</span><span><b>Главный файл агента.</b> CLAUDE.md, это&nbsp;файл с&nbsp;правилами, который агент перечитывает каждый раз, и&nbsp;границы: что&nbsp;он&nbsp;НЕ&nbsp;делает без&nbsp;твоего «да».</span></div>
-          <div class="l"><span class="d">2.3</span><span><b>Папки и&nbsp;память.</b> Жизнь / работа / входящие / архив, и&nbsp;агент сам&nbsp;разбирает твою помойку в&nbsp;«Загрузках». Сказал ему&nbsp;один раз&nbsp;«не&nbsp;так», и&nbsp;он&nbsp;это&nbsp;запомнил, а&nbsp;не&nbsp;косячит так&nbsp;же&nbsp;завтра.</span></div>
-          <div class="l"><span class="d">2.4</span><span><b>Лимит, модели и&nbsp;помощники.</b> Как&nbsp;не&nbsp;сидеть пять часов в&nbsp;ожидании, пока откроется лимит&nbsp;😭 /clear, /compact, /model и&nbsp;передачи между разговорами, какую модель брать на&nbsp;какое дело и&nbsp;два&nbsp;первых помощника: разведчик и&nbsp;проверяльщик.</span></div>
-          <div class="l"><span class="d">2.5</span><span><b>Скиллы: повторяющееся одной командой.</b><span class="new">новое</span> Скилл это&nbsp;сохранённый рецепт дела: пишешь короткую команду, и&nbsp;агент делает всё&nbsp;сам&nbsp;по&nbsp;твоим правилам. Мои&nbsp;примеры: утренний пост для&nbsp;клиента и&nbsp;карусель по&nbsp;шаблону. Задание: берёшь дело, которое делаешь уже&nbsp;третий раз, и&nbsp;превращаешь его&nbsp;в&nbsp;свой скилл.</span></div>
-        </div><div class="out">личный ассистент: папка, где&nbsp;агент тебя знает, таблица денег, помощники, первый скилл</div></div></div>
+          <div class="l"><span class="d">2.1</span><span><b>Ставим клод код&nbsp;и&nbsp;даём задачу разобраться с&nbsp;бабками.</b><span class="x"> VS&nbsp;Code и&nbsp;клод код&nbsp;ставим вместе, показываю каждый клик (страшно только первые пять минут), и&nbsp;сразу первое дело: скрины переводов → табличка расходов за&nbsp;месяц, где&nbsp;видно, куда всё&nbsp;утекает.</span></span></div>
+          <div class="l"><span class="d">2.2</span><span><b>Главный файл агента (без&nbsp;него не&nbsp;будет работы).</b><span class="x"> CLAUDE.md, это&nbsp;файл с&nbsp;правилами, который агент перечитывает каждый раз, и&nbsp;границы: что&nbsp;он&nbsp;НЕ&nbsp;делает без&nbsp;твоего «да».</span></span></div>
+          <div class="l"><span class="d">2.3</span><span><b>Папки и&nbsp;память.</b><span class="x"> Жизнь / работа / входящие / архив, и&nbsp;агент сам&nbsp;разбирает твою помойку в&nbsp;«Загрузках». Сказал ему&nbsp;один раз&nbsp;«не&nbsp;так», и&nbsp;он&nbsp;это&nbsp;запомнил, а&nbsp;не&nbsp;косячит так&nbsp;же&nbsp;завтра.</span></span></div>
+          <div class="l"><span class="d">2.4</span><span><b>Лимит, модели и&nbsp;помощники.</b><span class="x"> Как&nbsp;не&nbsp;сидеть пять часов в&nbsp;ожидании, пока откроется лимит&nbsp;😭 /clear, /compact, /model и&nbsp;передачи между разговорами, какую модель брать на&nbsp;какое дело и&nbsp;два&nbsp;первых помощника: разведчик и&nbsp;проверяльщик.</span></span></div>
+          <div class="l"><span class="d">2.5</span><span><b>Скиллы: повторяющееся одной командой.</b><span class="new">новое</span><span class="x"> Скилл это&nbsp;сохранённый рецепт дела: пишешь короткую команду, и&nbsp;агент делает всё&nbsp;сам&nbsp;по&nbsp;твоим правилам. Мои&nbsp;примеры: утренний пост для&nbsp;клиента и&nbsp;карусель по&nbsp;шаблону. Задание: берёшь дело, которое делаешь уже&nbsp;третий раз, и&nbsp;превращаешь его&nbsp;в&nbsp;свой скилл.</span></span></div>
+        </div><button type="button" class="more-btn"><span class="ar">↓</span><span class="mt">показать все уроки недели</span><span class="ar">↓</span></button><div class="out">личный ассистент: папка, где&nbsp;агент тебя знает, таблица денег, помощники, первый скилл</div></div></div>
       </div>
 
       <div class="wk">
         <div class="side"><img class="ph" src="img/r61.jpg" alt="Ретро-фото: женщина в офисе у компьютера"><div><div class="n">Неделя 3</div><div class="wt">Пишет как&nbsp;ты, а&nbsp;не как нейронка</div><span class="open">открывается 21.12</span></div></div>
         <div class="win"><div class="bar"><i></i><b>неделя 3</b></div><div class="in txt"><div class="les">
-          <div class="l"><span class="d">3.1</span><span><b>Голос по&nbsp;твоим постам.</b> Агент читает, как&nbsp;ты&nbsp;пишешь, и&nbsp;собирает правила голоса в&nbsp;файл, плюс список ИИ-штампов, которые мы&nbsp;безжалостно вычёркиваем.</span></div>
-          <div class="l"><span class="d">3.2</span><span><b>Контент-план на&nbsp;месяц.</b> Рубрики, поводы и&nbsp;что&nbsp;когда выходит, только это&nbsp;уже&nbsp;не&nbsp;красивая табличка, которую ты&nbsp;закроешь, а&nbsp;план, по&nbsp;которому реально постишь.</span></div>
-          <div class="l"><span class="d">3.3</span><span><b>Рилс по&nbsp;чужому образцу.</b> Кидаешь ролик, который зацепил, агент разбирает его&nbsp;по&nbsp;кусочкам, и&nbsp;у&nbsp;тебя свой сценарий по&nbsp;фразам, где&nbsp;одна мысль от&nbsp;хука до&nbsp;финала.</span></div>
-          <div class="l"><span class="d">3.4</span><span><b>Идеи и&nbsp;сторис.</b> 30 хуков за&nbsp;один заход и&nbsp;сторис на&nbsp;3–4 кадра, потому что&nbsp;длинные серии всё&nbsp;равно никто не&nbsp;дочитывает)</span></div>
-        </div><div class="out">файл голоса, план на&nbsp;месяц, сценарий рилс</div></div></div>
+          <div class="l"><span class="d">3.1</span><span><b>Голос по&nbsp;твоим постам.</b><span class="x"> Агент читает, как&nbsp;ты&nbsp;пишешь, и&nbsp;собирает правила голоса в&nbsp;файл, плюс список ИИ-штампов, которые мы&nbsp;безжалостно вычёркиваем.</span></span></div>
+          <div class="l"><span class="d">3.2</span><span><b>Контент-план на&nbsp;месяц.</b><span class="x"> Рубрики, поводы и&nbsp;что&nbsp;когда выходит, только это&nbsp;уже&nbsp;не&nbsp;красивая табличка, которую ты&nbsp;закроешь, а&nbsp;план, по&nbsp;которому реально постишь.</span></span></div>
+          <div class="l"><span class="d">3.3</span><span><b>Рилс по&nbsp;чужому образцу.</b><span class="x"> Кидаешь ролик, который зацепил, агент разбирает его&nbsp;по&nbsp;кусочкам, и&nbsp;у&nbsp;тебя свой сценарий по&nbsp;фразам, где&nbsp;одна мысль от&nbsp;хука до&nbsp;финала.</span></span></div>
+          <div class="l"><span class="d">3.4</span><span><b>Идеи и&nbsp;сторис.</b><span class="x"> 30 хуков за&nbsp;один заход и&nbsp;сторис на&nbsp;3–4 кадра, потому что&nbsp;длинные серии всё&nbsp;равно никто не&nbsp;дочитывает)</span></span></div>
+        </div><button type="button" class="more-btn"><span class="ar">↓</span><span class="mt">показать все уроки недели</span><span class="ar">↓</span></button><div class="out">файл голоса, план на&nbsp;месяц, сценарий рилс</div></div></div>
       </div>
 
       <div class="wk">
         <div class="side"><img class="ph" src="img/r53.jpg" alt="Ретро-фото: офис с компьютерами"><div><div class="n">Неделя 4</div><div class="wt">Карусели пачками, фигма, обложки</div><span class="open">открывается 4.01</span></div></div>
         <div class="win"><div class="bar"><i></i><b>неделя 4</b></div><div class="in txt"><div class="les">
-          <div class="l"><span class="d">4.1</span><span><b>Карусели по&nbsp;шаблону.</b> Табличка с&nbsp;текстами → пачка PNG&nbsp;в&nbsp;твоих цветах. Я&nbsp;так&nbsp;для&nbsp;своего медиа делаю по&nbsp;3 карусели в&nbsp;день и&nbsp;сама их&nbsp;не&nbsp;собираю ВООБЩЕ.</span></div>
-          <div class="l"><span class="d">4.2</span><span><b>Свой стиль.</b> Цвета, шрифты, референсы и&nbsp;что&nbsp;делать, когда карусель получилась «как&nbsp;у&nbsp;всех» (а&nbsp;сначала она&nbsp;так&nbsp;и&nbsp;получится, это&nbsp;нормально).</span></div>
-          <div class="l"><span class="d">4.3</span><span><b>Клод рисует в&nbsp;твоей фигме.</b> От&nbsp;одного шаблона до&nbsp;30 штук прямо в&nbsp;твоём файле, пока ты&nbsp;пьёшь кофе.</span></div>
-          <div class="l"><span class="d">4.4</span><span><b>Обложки по&nbsp;референсу.</b> Зачёркнутое слово, фото с&nbsp;огромным заголовком, мем-картинка с&nbsp;подписью, то&nbsp;есть всё, на&nbsp;чём&nbsp;в&nbsp;ленте залипают.</span></div>
-        </div><div class="out">10+ каруселей за&nbsp;заход и&nbsp;обложки</div></div></div>
+          <div class="l"><span class="d">4.1</span><span><b>Карусели по&nbsp;шаблону.</b><span class="x"> Табличка с&nbsp;текстами → пачка PNG&nbsp;в&nbsp;твоих цветах. Я&nbsp;так&nbsp;для&nbsp;своего медиа делаю по&nbsp;3 карусели в&nbsp;день и&nbsp;сама их&nbsp;не&nbsp;собираю ВООБЩЕ.</span></span></div>
+          <div class="l"><span class="d">4.2</span><span><b>Свой стиль.</b><span class="x"> Цвета, шрифты, референсы и&nbsp;что&nbsp;делать, когда карусель получилась «как&nbsp;у&nbsp;всех» (а&nbsp;сначала она&nbsp;так&nbsp;и&nbsp;получится, это&nbsp;нормально).</span></span></div>
+          <div class="l"><span class="d">4.3</span><span><b>Клод рисует как&nbsp;тебе надо в&nbsp;твоей фигме.</b><span class="x"> От&nbsp;одного шаблона до&nbsp;30 штук прямо в&nbsp;твоём файле, пока ты&nbsp;пьёшь кофе.</span></span></div>
+          <div class="l"><span class="d">4.4</span><span><b>Обложки по&nbsp;референсу.</b><span class="x"> Зачёркнутое слово, фото с&nbsp;огромным заголовком, мем-картинка с&nbsp;подписью, то&nbsp;есть всё, на&nbsp;чём&nbsp;в&nbsp;ленте залипают.</span></span></div>
+        </div><button type="button" class="more-btn"><span class="ar">↓</span><span class="mt">показать все уроки недели</span><span class="ar">↓</span></button><div class="out">10+ каруселей за&nbsp;заход и&nbsp;обложки</div></div></div>
       </div>
 
       <div class="wk">
         <div class="side"><img class="ph" src="img/r16.jpg" alt="Ретро-фото: люди у большого компьютера"><div><div class="n">Неделя 5</div><div class="wt">Личный бренд в&nbsp;инсте</div><span class="open">открывается 18.01</span></div></div>
         <div class="win"><div class="bar"><i></i><b>неделя 5</b></div><div class="in txt"><div class="les">
-          <div class="l"><span class="d">5.1</span><span><b>О&nbsp;чём&nbsp;ты.</b> Агент читает твой канал или&nbsp;заметки и&nbsp;собирает копилку историй, а&nbsp;из&nbsp;неё&nbsp;три&nbsp;темы блога и&nbsp;ответ на&nbsp;вопрос «для&nbsp;кого я&nbsp;вообще пишу».</span></div>
-          <div class="l"><span class="d">5.2</span><span><b>Упаковка профиля.</b> Шапка в&nbsp;трёх вариантах, аватар, закреп, хайлайты и&nbsp;ссылка (я&nbsp;со&nbsp;своей упаковкой агентства морочилась два&nbsp;года, не&nbsp;повторяйте)</span></div>
-          <div class="l"><span class="d">5.3</span><span><b>Рилс про&nbsp;себя.</b> Берёшь историю из&nbsp;копилки, и&nbsp;из&nbsp;неё&nbsp;получается хук, одна мысль и&nbsp;монтажный лист: чёрный экран на&nbsp;повороте, титры, музыка по&nbsp;битам.</span></div>
-          <div class="l"><span class="d">5.4</span><span><b>Threads: бесплатный трафик.</b> 25 тредов из&nbsp;твоих постов за&nbsp;один заход и&nbsp;расписание по&nbsp;три&nbsp;в&nbsp;день.</span></div>
-        </div><div class="out">о&nbsp;чём&nbsp;ты, упакованный профиль, рилс про&nbsp;себя, 25 тредов</div></div></div>
+          <div class="l"><span class="d">5.1</span><span><b>О&nbsp;чём&nbsp;ты.</b><span class="x"> Агент читает твой канал или&nbsp;заметки и&nbsp;собирает копилку историй, а&nbsp;из&nbsp;неё&nbsp;три&nbsp;темы блога и&nbsp;ответ на&nbsp;вопрос «для&nbsp;кого я&nbsp;вообще пишу».</span></span></div>
+          <div class="l"><span class="d">5.2</span><span><b>Упаковка профиля.</b><span class="x"> Шапка в&nbsp;трёх вариантах, аватар, закреп, хайлайты и&nbsp;ссылка (я&nbsp;со&nbsp;своей упаковкой агентства морочилась два&nbsp;года, не&nbsp;повторяйте)</span></span></div>
+          <div class="l"><span class="d">5.3</span><span><b>Рилс про&nbsp;себя.</b><span class="x"> Берёшь историю из&nbsp;копилки, и&nbsp;из&nbsp;неё&nbsp;получается хук, одна мысль и&nbsp;монтажный лист: чёрный экран на&nbsp;повороте, титры, музыка по&nbsp;битам.</span></span></div>
+          <div class="l"><span class="d">5.4</span><span><b>Threads: бесплатный трафик.</b><span class="x"> 25 тредов из&nbsp;твоих постов за&nbsp;один заход и&nbsp;расписание по&nbsp;три&nbsp;в&nbsp;день.</span></span></div>
+        </div><button type="button" class="more-btn"><span class="ar">↓</span><span class="mt">показать все уроки недели</span><span class="ar">↓</span></button><div class="out">о&nbsp;чём&nbsp;ты, упакованный профиль, рилс про&nbsp;себя, 25 тредов</div></div></div>
       </div>
 
       <div class="wk bonus">
         <div class="side"><img class="ph" src="img/r56.jpg" alt="Ретро-фото: женщина печатает сообщение"><div><div class="n">Бонусная неделя</div><div class="wt">Агент работает, пока ты&nbsp;занят</div><span class="open">открывается 11.01</span></div></div>
         <div class="win"><div class="bar"><i></i><b>бонус</b></div><div class="in txt"><div class="les">
-          <div class="l"><span class="d">Б.1</span><span><b>Свой бот&nbsp;в&nbsp;телеге.</b> Присылает черновики в&nbsp;одну группу по&nbsp;темам, принимает голосовые, а&nbsp;длинная переписка превращается в&nbsp;список задач. У&nbsp;меня так&nbsp;все&nbsp;посты, карусели и&nbsp;сценарии прилетают в&nbsp;одну группу, и&nbsp;я&nbsp;их&nbsp;только проверяю.</span></div>
-          <div class="l"><span class="d">Б.2</span><span><b>Notion и&nbsp;Google.</b> Таблицы и&nbsp;календарь, которые агент заполняет сам, а&nbsp;ты&nbsp;только открываешь и&nbsp;смотришь.</span></div>
-          <div class="l"><span class="d">Б.3</span><span><b>Трекер привычек и&nbsp;всё&nbsp;по&nbsp;расписанию.</b> Вечером он&nbsp;сам&nbsp;спрашивает «сделал?», в&nbsp;воскресенье присылает итоги недели, а&nbsp;в&nbsp;конце месяца итоги по&nbsp;деньгам (страшно, но&nbsp;полезно)))0</span></div>
-          <div class="l"><span class="d">Б.4</span><span><b>Своя команда помощников.</b> Копирайтер → редактор → проверка, такой маленький отдел, только без&nbsp;зарплат. Продолжение уроков 2.4 и&nbsp;2.5.</span></div>
-          <div class="l"><span class="d">Б.5</span><span><b>Первые клиенты: агент ищет и&nbsp;пишет.</b> Агент собирает список бизнесов под&nbsp;твою услугу, находит про&nbsp;каждый одну конкретную вещь и&nbsp;готовит черновик сообщения в&nbsp;табличке, а&nbsp;ты&nbsp;проверяешь и&nbsp;отправляешь руками со&nbsp;своего аккаунта, без&nbsp;рассылок и&nbsp;ботов, потому что&nbsp;на&nbsp;«здравствуйте, я&nbsp;SMM-специалист» уже&nbsp;никто не&nbsp;отвечает&nbsp;🤡</span></div>
-        </div><div class="out">свой бот, рутина по&nbsp;расписанию, команда помощников, первые сообщения клиентам</div></div></div>
+          <div class="l"><span class="d">Б.1</span><span><b>Свой бот-ассистент в&nbsp;телеге.</b><span class="x"> Присылает черновики в&nbsp;одну группу по&nbsp;темам, принимает голосовые, а&nbsp;длинная переписка превращается в&nbsp;список задач. У&nbsp;меня так&nbsp;все&nbsp;посты, карусели и&nbsp;сценарии прилетают в&nbsp;одну группу, и&nbsp;я&nbsp;их&nbsp;только проверяю.</span></span></div>
+          <div class="l"><span class="d">Б.2</span><span><b>Подключаем сервисы: Notion, Gmail, Google Calendar, Canva, Todoist и&nbsp;т.&nbsp;д.</b><span class="x"> Таблицы и&nbsp;календарь, которые агент заполняет сам, а&nbsp;ты&nbsp;только открываешь и&nbsp;смотришь.</span></span></div>
+          <div class="l"><span class="d">Б.3</span><span><b>Трекер привычек и&nbsp;всё&nbsp;по&nbsp;расписанию.</b><span class="x"> Вечером он&nbsp;сам&nbsp;спрашивает «сделал?», в&nbsp;воскресенье присылает итоги недели, а&nbsp;в&nbsp;конце месяца итоги по&nbsp;деньгам (страшно, но&nbsp;полезно)))0</span></span></div>
+          <div class="l"><span class="d">Б.4</span><span><b>Своя команда помощников.</b><span class="x"> Копирайтер → редактор → проверка, такой маленький отдел, только без&nbsp;зарплат. Продолжение уроков 2.4 и&nbsp;2.5.</span></span></div>
+          <div class="l"><span class="d">Б.5</span><span><b>Первые клиенты: агент ищет и&nbsp;пишет.</b><span class="x"> Агент собирает список бизнесов под&nbsp;твою услугу, находит про&nbsp;каждый одну конкретную вещь и&nbsp;готовит черновик сообщения в&nbsp;табличке, а&nbsp;ты&nbsp;проверяешь и&nbsp;отправляешь руками со&nbsp;своего аккаунта, без&nbsp;рассылок и&nbsp;ботов, потому что&nbsp;на&nbsp;«здравствуйте, я&nbsp;SMM-специалист» уже&nbsp;никто не&nbsp;отвечает&nbsp;🤡</span></span></div>
+        </div><button type="button" class="more-btn"><span class="ar">↓</span><span class="mt">показать все уроки недели</span><span class="ar">↓</span></button><div class="out">свой бот, рутина по&nbsp;расписанию, команда помощников, первые сообщения клиентам</div></div></div>
       </div>
 
     </div>
@@ -578,10 +619,10 @@ section{padding-block:84px}
     <div class="photo"><img class="ph" src="img/sonya-kofe.jpg" alt="Софья с кофе"></div>
     <div class="q">
       <h2 class="st mid"><span class="y">а&nbsp;я</span><br><span class="w">справлюсь?</span></h2>
-      <div class="win"><div class="bar"><i></i><b>я&nbsp;не&nbsp;программист</b></div><div class="in txt">Я&nbsp;тоже, и&nbsp;код&nbsp;не&nbsp;пишу ВООБЩЕ. Всё&nbsp;ставим вместе, на&nbsp;видео показываю каждый клик, а&nbsp;первая неделя вообще идёт в&nbsp;обычном приложении, где&nbsp;ничего устанавливать не&nbsp;надо.</div></div>
-      <div class="win"><div class="bar"><i></i><b>нет&nbsp;$100 на&nbsp;подписку</b></div><div class="in txt">И&nbsp;не&nbsp;надо. Для&nbsp;интенсива хватает Pro, это&nbsp;около $20 в&nbsp;месяц, мне&nbsp;его&nbsp;хватает на&nbsp;всю&nbsp;работу, если не&nbsp;жечь лимит. А&nbsp;первую неделю можно пройти ещё&nbsp;до&nbsp;того, как&nbsp;купишь подписку.</div></div>
-      <div class="win"><div class="bar"><i></i><b>некогда разбираться</b></div><div class="in txt">Запись урока 5–7 минут, к&nbsp;ней&nbsp;готовый запрос, который просто копируешь, и&nbsp;доступ остаётся, так&nbsp;что&nbsp;проходишь в&nbsp;своём темпе.</div></div>
-      <div class="win"><div class="bar"><i></i><b>пишет как&nbsp;нейронка</b></div><div class="in txt">Потому что&nbsp;он&nbsp;тебя ещё&nbsp;не&nbsp;знает. Целая неделя 3 про&nbsp;это: агент собирает твой голос по&nbsp;твоим постам, и&nbsp;мы&nbsp;вычёркиваем все&nbsp;ИИ-штампы.</div></div>
+      <div class="win"><div class="bar"><i></i><b>я&nbsp;не&nbsp;программист</b></div><div class="in txt">Я&nbsp;тоже. Каждый клик на&nbsp;видео, а&nbsp;первая неделя идёт в&nbsp;обычном приложении, где&nbsp;ставить ничего не&nbsp;надо.</div></div>
+      <div class="win"><div class="bar"><i></i><b>нет&nbsp;$100 на&nbsp;подписку</b></div><div class="in txt">И&nbsp;не&nbsp;надо: хватает Pro за&nbsp;~$20 в&nbsp;месяц, а&nbsp;первую неделю можно пройти ещё&nbsp;до&nbsp;подписки.</div></div>
+      <div class="win"><div class="bar"><i></i><b>некогда разбираться</b></div><div class="in txt">Урок 5–7 минут, к&nbsp;нему готовый запрос, и&nbsp;доступ остаётся, так&nbsp;что&nbsp;проходишь в&nbsp;своём темпе.</div></div>
+      <div class="win"><div class="bar"><i></i><b>пишет как&nbsp;нейронка</b></div><div class="in txt">Потому что&nbsp;он&nbsp;тебя ещё&nbsp;не&nbsp;знает, и&nbsp;этому целая неделя 3: голос по&nbsp;твоим постам и&nbsp;минус ИИ-штампы.</div></div>
       <div class="win"><div class="bar"><i></i><b>какой нужен комп</b></div><div class="in txt">Любой мак&nbsp;или&nbsp;Windows.</div></div>
     </div>
   </div>
@@ -593,7 +634,7 @@ section{padding-block:84px}
     <div style="display:grid;gap:22px">
       <h2 class="st mid">Заходишь<span class="p">(7.12)</span></h2>
       <div class="price">3 990 ₽</div>
-      <p class="lead">Один раз, без&nbsp;подписки. 21 урок и&nbsp;5 бонусных, файлы с&nbsp;готовыми запросами и&nbsp;разборы твоих задач в&nbsp;комментах. Пиши в&nbsp;канал, там&nbsp;все&nbsp;новости и&nbsp;как&nbsp;попасть, а&nbsp;как&nbsp;я&nbsp;живу с&nbsp;агентом каждый день, смотри в&nbsp;инсте <a class="ig" href="https://instagram.com/soldysofa" target="_blank" rel="noopener">@soldysofa</a>.</p>
+      <p class="lead">Один раз, без&nbsp;подписки. Жми кнопку, чтобы попасть в&nbsp;канал со&nbsp;всеми новостями, а&nbsp;как&nbsp;я&nbsp;живу с&nbsp;агентом, смотри в&nbsp;инсте <a class="ig" href="https://instagram.com/soldysofa" target="_blank" rel="noopener">@soldysofa</a>.</p>
       <div class="cta-row">
         <a class="btn" href="https://t.me/schas_razberus" target="_blank" rel="noopener">Хочу на&nbsp;интенсив →</a>
         <a class="btn alt" href="#programma">Ещё&nbsp;раз&nbsp;программу</a>
@@ -608,19 +649,19 @@ section{padding-block:84px}
         <h3>Наставничество</h3>
         <div class="tp">25 000 ₽ <s>35 000</s></div>
         <p class="tn">25 000 до&nbsp;30.11, потом 35 000, бронь места 10 000</p>
-        <p>По&nbsp;SMM с&nbsp;автоматизацией работы «до&nbsp;первого клиента». 6 недель с&nbsp;8.12, я&nbsp;рядом на&nbsp;каждом шаге и&nbsp;довожу до&nbsp;первого клиента.</p>
+        <p>По&nbsp;SMM с&nbsp;автоматизацией работы «до&nbsp;первого клиента», 6 недель с&nbsp;8.12, я&nbsp;рядом на&nbsp;каждом шаге.</p>
       </div></div>
       <div class="win"><div class="bar"><i></i><b>за&nbsp;тебя · для&nbsp;себя</b></div><div class="in txt">
         <h3>Настройка для&nbsp;себя</h3>
         <div class="tp">10 000 ₽</div>
         <p class="tn">один созвон, 10 мест в&nbsp;декабре</p>
-        <p>Наводим порядок: папки, доска задач, Клод узнаёт про&nbsp;тебя всё, что&nbsp;нужно, и&nbsp;сажаем его&nbsp;на&nbsp;одну рутину, чтобы он&nbsp;делал её&nbsp;сам. Неделю после отвечаю на&nbsp;вопросы.</p>
+        <p>Папки, доска задач, Клод узнаёт тебя и&nbsp;забирает одну рутину. Неделю после отвечаю на&nbsp;вопросы.</p>
       </div></div>
       <div class="win"><div class="bar"><i></i><b>за&nbsp;тебя · для&nbsp;бизнеса</b></div><div class="in txt">
         <h3>Настройка для&nbsp;бизнеса</h3>
         <div class="tp">30 000 ₽</div>
         <p class="tn">два созвона, 3 места в&nbsp;декабре</p>
-        <p>То&nbsp;же&nbsp;самое плюс порядок в&nbsp;работе команды и&nbsp;агент с&nbsp;помощниками на&nbsp;ваши рабочие задачи. Две&nbsp;недели вопросов.</p>
+        <p>То&nbsp;же&nbsp;плюс порядок в&nbsp;команде и&nbsp;агент с&nbsp;помощниками на&nbsp;ваши задачи. Две&nbsp;недели вопросов.</p>
       </div></div>
     </div>
     <p class="tn" style="margin-top:22px">Пиши в&nbsp;канал или&nbsp;в&nbsp;личку <a href="https://t.me/lordywood" target="_blank" rel="noopener">@lordywood</a>, расскажу, что&nbsp;подойдёт именно тебе.</p>
@@ -677,6 +718,10 @@ section{padding-block:84px}
 })();
 </script>
 
+<script>
+document.querySelectorAll('.more-btn').forEach(function(b){b.addEventListener('click',function(){
+  var wk=b.closest('.wk')||b.closest('.peek'); var o=wk.classList.toggle('open'); b.querySelector('.mt').textContent=o?(b.dataset.o||'свернуть'):(b.dataset.c||'показать все уроки недели');})});
+</script>
 <footer class="wrap"><div class="logo">щас&nbsp;разберусь<span>by&nbsp;Софья</span></div>
   <div class="contacts"><a href="https://instagram.com/soldysofa" target="_blank" rel="noopener"><small>инст</small>@soldysofa</a><a href="https://t.me/soldysofa" target="_blank" rel="noopener"><small>личный тгк</small>@soldysofa</a><a href="https://t.me/schas_razberus" target="_blank" rel="noopener"><small>канал курса</small>@schas_razberus</a></div>
 </footer>
